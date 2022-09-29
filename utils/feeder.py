@@ -140,7 +140,7 @@ class TrainFeeder(Dataset):
         return self
     
     def get_channels(self):
-        data, _, _,_ = self.__getitem__(0)
+        data, _, _, _ = self.__getitem__(0)
         in_channels, _, _ = data.shape
         return in_channels
 
@@ -230,7 +230,7 @@ class EvalFeeder(Dataset):
         """
         self.processed_data_dir = processed_data_dir
         self.dataset = dataset
-        self.graph=graph
+        self.graph = graph
         self.input_temporal_resolution = input_temporal_resolution
         self.parts_distance = parts_distance
         self.random_perturbation = random_perturbation
@@ -305,7 +305,7 @@ class EvalFeeder(Dataset):
         return self
     
     def get_channels(self):
-        data, _, _,_ = self.__getitem__(0)
+        data, _, _, _ = self.__getitem__(0)
         in_channels, _, _ = data.shape
         return in_channels
 
