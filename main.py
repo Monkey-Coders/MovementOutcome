@@ -32,7 +32,7 @@ num_workers = 4
 model_script = 'models.gcn_search_model' # <-- Assign model script (e.g., models.gcn_search_model)
 input_dimensions = 2 # <-- Assign number of dimensions in the coordinate space (e.g., 2)
 input_spatial_resolution = 19 # <-- Assign number of joints in infant skeleton (e.g., 19)
-input_temporal_resolution = 30 #150 # <-- Assign number of time steps (i.e., frames) in a window (e.g., 150)
+input_temporal_resolution = 150 # <-- Assign number of time steps (i.e., frames) in a window (e.g., 150)
 num_input_branches = 3
 edge_importance_weighting = True
 dropout = 0
@@ -64,8 +64,8 @@ loss_filter_size = 5
 
 #### Step 10: Balance the training set by adjusting the number of positive samples per negative sample (e.g., for In-Motion with around 5 times more negative samples than positive samples (15% prevalence of CP), each positive sample is represented 5 times more frequent than each negative sample).
 train_num_positive_samples_per_negative_sample = 5 # <-- Assign in accordance with prevalence of outcome in training set
-train_num_per_positive_sample = train_num_positive_samples_per_negative_sample*3#12
-train_num_per_negative_sample = 3#12
+train_num_per_positive_sample = train_num_positive_samples_per_negative_sample*12
+train_num_per_negative_sample = 12
 
 #### Step 11: Set hyperparameters for the optimizer (SGD) 
 learning_rate = 0.0005
@@ -90,7 +90,7 @@ roll_sequence = True
 #### Step 13: Set evaluation options (e.g., test set size (defaults to 25% of all individuals), mini batch size, number of frames between each sample and aggregation scheme)
 test_size = 0.25
 evaluation_batch_size = trainval_batch_size
-parts_distance = 1000#75
+parts_distance = 75
 aggregate_binary = False
 aggregate_binary_threshold = None
 median_aggregation = True
@@ -105,19 +105,19 @@ temperature_drop = 3
 performance_threshold = 0.9
 search_space = {
     'graph': ['spatial', 'dis2', 'dis4', 'dis4+2'],
-    'input_width': [6],#[6, 8, 10, 12],
-    'num_input_modules': [1],#[1, 2, 3],
+    'input_width': [6, 8, 10, 12],
+    'num_input_modules': [1, 2, 3],
     'initial_block_type': ['basic', 'bottleneck', 'mbconv'],
     'initial_residual': ['null', 'block', 'module', 'dense'],
-    'input_temporal_scales': [1],#[1, 2, 3, 'linear'],
-    'initial_main_width': [6],#[6, 8, 10, 12],
-    'num_main_levels': [1],#[1, 2],
-    'num_main_level_modules': [1],#[1, 2, 3],
+    'input_temporal_scales': [1, 2, 3, 'linear'],
+    'initial_main_width': [6, 8, 10, 12],
+    'num_main_levels': [1, 2],
+    'num_main_level_modules': [1, 2, 3],
     'block_type': ['basic', 'bottleneck', 'mbconv'],
     'bottleneck_factor': [2, 4],
     'residual': ['null', 'block', 'module', 'dense'],
     'main_temporal_scales': [1, 2, 3, 'linear'],
-    'temporal_kernel_size': [3], #[3, 5, 7, 9],
+    'temporal_kernel_size': [3, 5, 7, 9],
     'se': ['null', 'inner', 'outer', 'both'],
     'se_ratio': [2, 4],
     'se_type': ['relative', 'absolute'],
@@ -127,7 +127,7 @@ search_space = {
 }
 search_train_dataset = 'train1'
 search_val_dataset = 'val1'
-search_num_epochs = 3#100
+search_num_epochs = 100
 search_save_interval = 20000000
 search_save_preds = False 
 search_critical_epochs = [10, 20, 30, 40, 50, 60, 70, 80, 90]
@@ -137,7 +137,7 @@ search_critical_epoch_values = [0.75, 0.775, 0.8, 0.825, 0.85, 0.875, 0.9, 0.925
 crossval_folds = 7
 crossval_train_datasets = ['train{0}'.format(n) for n in range(1, crossval_folds+1)]
 crossval_val_datasets = ['val{0}'.format(n) for n in range(1, crossval_folds+1)]
-crossval_num_epochs = 5#200
+crossval_num_epochs = 200
 crossval_save_interval = 1
 crossval_save_preds = False
 crossval_critical_epochs = []
