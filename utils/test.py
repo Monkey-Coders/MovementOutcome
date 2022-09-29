@@ -171,7 +171,7 @@ class Operator():
             state.update(weights)
             self.model.load_state_dict(state)
     
-        # Initiate evalation mode
+        # Initiate evaluation mode
         self.model.eval()
         
         # Fetch test data
