@@ -160,17 +160,6 @@ def normalize_digraph(A):
     return AD
 
 
-def normalize_undigraph(A):
-    Dl = np.sum(A, 0)
-    num_nodes = A.shape[0]
-    Dn = np.zeros((num_nodes, num_nodes))
-    for i in range(num_nodes):
-        if Dl[i] > 0:
-            Dn[i, i] = Dl[i]**(-0.5)
-    DAD = np.dot(np.dot(Dn, A), Dn)
-    return DAD
-
-
 def get_adjacency_matrix(edges, num_nodes):
     A = np.zeros((num_nodes, num_nodes), dtype=np.float32)
     for edge in edges:
