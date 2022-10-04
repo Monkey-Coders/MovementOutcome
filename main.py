@@ -28,7 +28,7 @@ if __name__ ==  '__main__':
 
     #### Step 4: Choose usage of output device and number of workers
     output_device = 0 # <-- Assign device with CUDA to use GPU
-    num_workers = 0
+    num_workers = 4
 
     #### Step 5: Choose model type and configuration
     model_script = 'models.gcn_search_model' # <-- Assign model script (e.g., models.gcn_search_model)
