@@ -336,7 +336,7 @@ def predict(coords_dir, coords_path):
             
         # Load model weights
         for file in os.listdir(experiment_dir):
-            if file.endswith('.pt') and file.startswith('epoch-{0}*'.format(best_epoch)):
+            if file.endswith('.pt') and file.startswith('epoch-{0}+'.format(best_epoch)):
                 weights_path = os.path.join(experiment_dir, file)
         weights = torch.load(weights_path)
         if gpu_available:

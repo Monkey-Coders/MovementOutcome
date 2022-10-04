@@ -155,7 +155,7 @@ class Operator():
         
         # Load model weights
         for file in os.listdir(self.experiment_dir):
-            if file.endswith('.pt') and file.startswith('epoch-{0}*'.format(self.best_epoch)):
+            if file.endswith('.pt') and file.startswith('epoch-{0}+'.format(self.best_epoch)):
                 weights_path = os.path.join(
                     self.experiment_dir, file)
         weights = torch.load(weights_path)

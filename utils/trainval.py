@@ -371,7 +371,7 @@ class Operator():
         loss_negatives = []
         for sample_pred, sample_label in zip(preds, labels):
             if self.hyperparameters['devices']['gpu_available']:
-                sample_loss = self.loss(torch.tensor(sample_pred).unsqueeze(0).cuda(self.output_device), torch.tensor(sample_label).unsqueeze(0).cuda(self.output_device))
+                sample_loss = self.loss(torch.tensor(sample_pred).unsqueeze(0).cuda(self.output_device), torch.tensor(sample_label).unsqueeze(0).cuda(self.output_device)).cpu()
             else:
                 sample_loss = self.loss(torch.tensor(sample_pred).unsqueeze(0), torch.tensor(sample_label).unsqueeze(0))
             if sample_label == 1:
@@ -440,7 +440,7 @@ class Operator():
             # Save model weights
             save_model = ((epoch + 1) % (self.hyperparameters['crossval']['crossval_save_interval'] if self.crossval else self.hyperparameters['search']['search_save_interval']) == 0)
             if save_model:
-                weights_path = os.path.join(self.experiment_dir, 'epoch-{0}*loss-{1:.5f}*positive_loss-{2:.5f}*negative_loss-{3:.5f}*window_auc-{4:.5f}*subject_auc-{5:.5f}*iteration-{6}.pt'.format(epoch + 1, val_loss, val_positive_loss, val_negative_loss, val_window_auc, val_auc, int(self.iteration)))
+                weights_path = os.path.join(self.experiment_dir, 'epoch-{0}+loss-{1:.5f}+positive_loss-{2:.5f}+negative_loss-{3:.5f}+window_auc-{4:.5f}+subject_auc-{5:.5f}+iteration-{6}.pt'.format(epoch + 1, val_loss, val_positive_loss, val_negative_loss, val_window_auc, val_auc, int(self.iteration)))
                 weights = OrderedDict([[k.split('module.')[-1], v.cpu()] for k, v in model_state_dict.items()])
                 torch.save(weights, weights_path)
 

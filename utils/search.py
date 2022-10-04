@@ -66,7 +66,7 @@ def get_candidate(search_space, candidate_history):
                 value += alternative_prob
                 if value >= random_number:
                     candidate[choice] = alternative
-                    candidate_string += '*{0}-{1}'.format(choice, alternative) if len(candidate_string) > 1 else '{0}-{1}'.format(choice, alternative)
+                    candidate_string += '+{0}-{1}'.format(choice, alternative) if len(candidate_string) > 1 else '{0}-{1}'.format(choice, alternative)
                     break
 
         if candidate_string not in candidate_history:
@@ -86,7 +86,7 @@ def update_search_space(population, temperature):
     # Determine contribution of each alternative in search space
     search_space_count = {}
     for n, (candidate_string, _, _) in enumerate(population, 1):
-        structure = candidate_string.split('*')
+        structure = candidate_string.split('+')
         for pair in structure:
             choice, alternative = pair.split('-')
             if not choice in search_space_count.keys():
