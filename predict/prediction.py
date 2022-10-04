@@ -132,7 +132,7 @@ def predict(coords_dir, coords_path):
     model_script = 'models.gcn_search_model' # <-- Assign model script (e.g., models.gcn_search_model)
     input_dimensions = 2 # <-- Assign number of dimensions in the coordinate space (e.g., 2)
     input_spatial_resolution = 19 # <-- Assign number of joints in infant skeleton (e.g., 19)
-    input_temporal_resolution = 30 #150 # <-- Assign number of time steps (i.e., frames) in a window (e.g., 150)
+    input_temporal_resolution = 150 # <-- Assign number of time steps (i.e., frames) in a window (e.g., 150)
     num_input_branches = 3
     edge_importance_weighting = True
     dropout = 0
