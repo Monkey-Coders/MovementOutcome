@@ -153,6 +153,7 @@ if __name__ ==  '__main__':
     import json
     import torch
     import numpy as np
+    import pickle
 
     # Local dependencies
     model = __import__(model_script, fromlist=['object'])
@@ -412,7 +413,7 @@ if __name__ ==  '__main__':
         preds_object = []
         for video_id, pred, label in zip(video_ids, preds_ensemble, labels):
             preds_object.append((video_id, pred, label))
-        with open(os.path.join(self.search_dir, 'ensemble_test_preds.pkl'), 'wb') as f:
+        with open(os.path.join(search_dir, 'ensemble_test_preds.pkl'), 'wb') as f:
             pickle.dump(preds_object, f)
 
         # Compute Area Under ROC Curve
