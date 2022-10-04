@@ -218,7 +218,7 @@ class Operator():
         loss_negatives = []
         for sample_pred, sample_label in zip(preds, labels):
             if self.hyperparameters['devices']['gpu_available']:
-                sample_loss = self.loss(torch.tensor(sample_pred).unsqueeze(0).cuda(self.output_device), torch.tensor(sample_label).unsqueeze(0).cuda(self.output_device))
+                sample_loss = self.loss(torch.tensor(sample_pred).unsqueeze(0).cuda(self.output_device), torch.tensor(sample_label).unsqueeze(0).cuda(self.output_device)).cpu()
             else:
                 sample_loss = self.loss(torch.tensor(sample_pred).unsqueeze(0), torch.tensor(sample_label).unsqueeze(0))
             if sample_label == 1:
