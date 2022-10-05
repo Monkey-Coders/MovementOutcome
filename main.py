@@ -44,8 +44,8 @@ if __name__ ==  '__main__':
     neighbor_link = [(0,1), (2,1), (3,1), (1,4), (9,8), (10,9), (11,10), (5, 8), (6,5), (7,6), (4,8), (12,8), (16,12), (17,16), (18,17), (13,12), (14,13), (15,14)] # <-- Assign neighboring body parts that are connected by bones in the skeleton (e.g., In-Motion 19: [(0,1), (2,1), (3,1), (1,4), (9,8), (10,9), (11,10), (5, 8), (6,5), (7,6), (4,8), (12,8), (16,12), (17,16), (18,17), (13,12), (14,13), (15,14)], In-Motion 29: [(0,1), (2,1), (3,1), (1,4), (9,8), (10,9), (11,10), (5,8), (6,5), (7,6), (4,8), (12,8), (16,12), (17,16), (18,17), (13,12), (14,13), (15,14), (19,7), (20,7), (21,11), (22,11), (23,15), (24,15), (25,15), (26,18), (27,18), (28,18)])
     center = 8 # <-- Assign index of body part in center of skeleton (e.g., In-Motion 19/29: 8 for thorax)
     bone_conns = [1, 4, 1, 1, 8, 8, 5, 6, 8, 8, 9, 10, 8, 12, 13, 14, 12, 16, 17] # <-- Assign parent (i.e., body part closer to the center) of each body part (e.g., In-Motion 19: [1, 4, 1, 1, 8, 8, 5, 6, 8, 8, 9, 10, 8, 12, 13, 14, 12, 16, 17], In-Motion 29: [1, 4, 1, 1, 8, 8, 5, 6, 8, 8, 9, 10, 8, 12, 13, 14, 12, 16, 17, 7, 7, 11, 11, 15, 15, 15, 18, 18, 18])
-    thorax_index = 8 # <-- Assign index of thorax bpdy part (e.g., In-Motion 19/29: 8)
-    pelvis_index = 12 # <-- Assign index of pelvis bpdy part (e.g., In-Motion 19/29: 12)
+    thorax_index = 8 # <-- Assign index of thorax body part (e.g., In-Motion 19/29: 8)
+    pelvis_index = 12 # <-- Assign index of pelvis body part (e.g., In-Motion 19/29: 12)
     use_mask = True 
 
     #### Step 7: Choose type of input features
