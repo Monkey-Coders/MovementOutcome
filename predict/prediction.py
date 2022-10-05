@@ -157,7 +157,7 @@ def predict(coords_dir, coords_path):
 
     #### Step 8: Set frames per second of coordinate files and median filter stride for preprocessing.
     frames_per_second = 30.0 # <-- Assign (i.e., assumes consistent frame rate across coordinate files)
-    filter_stride = 2
+    filter_stride = 2 # <-- Assign stride of median filter for temporal smoothing of coordinates.
     
     #### Step 10: Set evaluation options (e.g., mini batch size, number of frames between each sample, and aggregation scheme)
     evaluation_batch_size = 32
