@@ -58,7 +58,7 @@ if __name__ ==  '__main__':
 
     #### Step 8: Set frames per second of coordinate files and median filter stride for preprocessing.
     frames_per_second = 30.0 # <-- Assign (i.e., assumes consistent frame rate across coordinate files)
-    filter_stride = 2
+    filter_stride = 2 # <-- Assign stride of median filter for temporal smoothing of coordinates.
 
     #### Step 9: Set hyperparameters for training and validation (e.g., mini batch size and loss filter size)
     trainval_batch_size = 32 
