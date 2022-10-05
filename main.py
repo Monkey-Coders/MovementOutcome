@@ -5,8 +5,8 @@ if __name__ ==  '__main__':
     """ INSERT HYPERPARAMETER SETTINGS FOR NEURAL ARCHITECTURE SEARCH, CROSS-VALIDATION, AND EVALUATION """
     """ Project """
 
-    #### Step 1: Create a new folder under 'projects' and enter the name of the folder below. Create a 'data' and 'experiments' subfolder. 
-    # NOTE: You do not have to create a new project for each experiment. Your experiments subfolder will contain all your experiments  
+    #### Step 1: Create a new folder under 'projects' and enter the name of the folder below. Create a 'data' and 'searches' subfolder. 
+    # NOTE: You do not have to create a new project for each search. Your searches subfolder will contain all your searches  
     project_name = 'im2021' # <--- Enter the name of your project folder
 
     project_dir = os.path.join('projects', project_name)
@@ -18,7 +18,7 @@ if __name__ ==  '__main__':
     # Options
 
     #### Step 2: Enter the name of your neural architecture search
-    # NOTE: Remember to give your search a unique name that is not contained in your 'experiments' subfolder
+    # NOTE: Remember to give your search a unique name that is not contained in your 'searches' subfolder
     search_name = '21092022 1522 IM2021' # <--- Enter the name of your search
 
     #### Step 3: Decide if you want to run neural architecture search (NAS), cross-validation, or model evaluation. The NAS procedure 'search' obtains the model with the highest Area Under the ROC Curve (AUC) on the main validation dataset. The cross-validation procedure 'cross_val' obtains multiple model instances (with different sets of weights) through training and validation on different subsets of data (i.e., k-fold cross-validation). The evaluation procedure 'evaluate' estimates likelihood of movement outcome on test data and aggregates the prediction across the ensemble of model instances to perform binary classification of movement outcome. 
