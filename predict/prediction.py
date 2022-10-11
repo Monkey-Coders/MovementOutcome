@@ -110,9 +110,9 @@ def predict(coords_dir, coords_path):
     #### Step 1: Project name
     project_name = 'im2021' # <---Enter the name of your project folder
     
-    project_dir = os.path.join('../projects', project_name)
+    project_dir = os.path.join('projects', project_name)
     sys.path.append(project_dir)
-    sys.path.append(os.path.join('..'))
+    sys.path.append(os.path.join('.'))
     
     
     """ Search details """
