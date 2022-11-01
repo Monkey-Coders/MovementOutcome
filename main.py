@@ -1,13 +1,19 @@
+
+from tqdm import tqdm
+
+
 if __name__ ==  '__main__':
     
     import os, sys
+    from datetime import datetime
 
     """ INSERT HYPERPARAMETER SETTINGS FOR NEURAL ARCHITECTURE SEARCH, CROSS-VALIDATION, AND EVALUATION """
     """ Project """
 
     #### Step 1: Create a new folder under 'projects' and enter the name of the folder below. Create a 'data' and 'searches' subfolder. 
     # NOTE: You do not have to create a new project for each search. Your searches subfolder will contain all your searches  
-    project_name = 'im2021' # <--- Enter the name of your project folder
+    project_name = 'sp2022' # <--- Enter the name of your project folder
+    RUN = datetime.now()
 
     project_dir = os.path.join('projects', project_name)
     sys.path.append(project_dir)
@@ -19,12 +25,12 @@ if __name__ ==  '__main__':
 
     #### Step 2: Enter the name of your neural architecture search
     # NOTE: Remember to give your search a unique name that is not contained in your 'searches' subfolder
-    search_name = '21092022 1522 IM2021' # <--- Enter the name of your search
+    search_name = RUN.strftime("%Y/%B/%d/%H:%M:%S") # <--- Enter the name of your search
 
     #### Step 3: Decide if you want to run neural architecture search (NAS), cross-validation, or model evaluation. The NAS procedure 'search' obtains the model with the highest Area Under the ROC Curve (AUC) on the main validation dataset. The cross-validation procedure 'cross_val' obtains multiple model instances (with different sets of weights) through training and validation on different subsets of data (i.e., k-fold cross-validation). The evaluation procedure 'evaluate' estimates likelihood of movement outcome on test data and aggregates the prediction across the ensemble of model instances to perform binary classification of movement outcome. 
     search = True # <-- Assign [True, False] 
-    crossval = True # <-- Assign [True, False] 
-    evaluate = True # <-- Assign [True, False] 
+    crossval = False # <-- Assign [True, False] 
+    evaluate = False # <-- Assign [True, False] 
 
     #### Step 4: Choose usage of output device and number of workers
     output_device = 0 # <-- Assign device with CUDA to use GPU
@@ -33,17 +39,17 @@ if __name__ ==  '__main__':
     #### Step 5: Choose model type and configuration
     model_script = 'models.gcn_search_model' # <-- Assign model script (e.g., models.gcn_search_model)
     input_dimensions = 2 # <-- Assign number of dimensions in the coordinate space (e.g., 2)
-    input_spatial_resolution = 19 # <-- Assign number of joints in human skeleton (e.g., 19)
+    input_spatial_resolution = 29 # <-- Assign number of joints in human skeleton (e.g., 19)
     input_temporal_resolution = 150 # <-- Assign number of time steps (i.e., frames) in a window (e.g., 150)
     num_input_branches = 3
     edge_importance_weighting = True
     dropout = 0
 
     #### Step 6: Choose graph type and configuration.
-    body_parts = ['head_top', 'nose', 'right_ear', 'left_ear', 'upper_neck', 'right_shoulder', 'right_elbow', 'right_wrist', 'thorax', 'left_shoulder', 'left_elbow', 'left_wrist', 'pelvis', 'right_hip', 'right_knee', 'right_ankle', 'left_hip', 'left_knee', 'left_ankle'] # <-- Assign body parts in skeleton (e.g., In-Motion 19: ['head_top', 'nose', 'right_ear', 'left_ear', 'upper_neck', 'right_shoulder', 'right_elbow', 'right_wrist', 'thorax', 'left_shoulder', 'left_elbow', 'left_wrist', 'pelvis', 'right_hip', 'right_knee', 'right_ankle', 'left_hip', 'left_knee', 'left_ankle'], In-Motion 29: ['head_top', 'nose', 'right_ear', 'left_ear', 'upper_neck', 'right_shoulder', 'right_elbow', 'right_wrist', 'thorax', 'left_shoulder', 'left_elbow', 'left_wrist', 'pelvis', 'right_hip', 'right_knee', 'right_ankle', 'left_hip', 'left_knee', 'left_ankle', 'right_little_finger', 'right_index_finger', 'left_little_finger', 'left_index_finger', 'right_heel', 'right_little_toe', 'right_big_toe', 'left_heel', 'left_little_toe', 'left_big_toe'])
-    neighbor_link = [(0,1), (2,1), (3,1), (1,4), (9,8), (10,9), (11,10), (5, 8), (6,5), (7,6), (4,8), (12,8), (16,12), (17,16), (18,17), (13,12), (14,13), (15,14)] # <-- Assign neighboring body parts that are connected by bones in the skeleton (e.g., In-Motion 19: [(0,1), (2,1), (3,1), (1,4), (9,8), (10,9), (11,10), (5, 8), (6,5), (7,6), (4,8), (12,8), (16,12), (17,16), (18,17), (13,12), (14,13), (15,14)], In-Motion 29: [(0,1), (2,1), (3,1), (1,4), (9,8), (10,9), (11,10), (5,8), (6,5), (7,6), (4,8), (12,8), (16,12), (17,16), (18,17), (13,12), (14,13), (15,14), (19,7), (20,7), (21,11), (22,11), (23,15), (24,15), (25,15), (26,18), (27,18), (28,18)])
+    body_parts = ['head_top', 'nose', 'right_ear', 'left_ear', 'upper_neck', 'right_shoulder', 'right_elbow', 'right_wrist', 'thorax', 'left_shoulder', 'left_elbow', 'left_wrist', 'pelvis', 'right_hip', 'right_knee', 'right_ankle', 'left_hip', 'left_knee', 'left_ankle', 'right_little_finger', 'right_index_finger', 'left_little_finger', 'left_index_finger', 'right_heel', 'right_little_toe', 'right_big_toe', 'left_heel', 'left_little_toe', 'left_big_toe']
+    neighbor_link = [(0,1), (2,1), (3,1), (1,4), (9,8), (10,9), (11,10), (5,8), (6,5), (7,6), (4,8), (12,8), (16,12), (17,16), (18,17), (13,12), (14,13), (15,14), (19,7), (20,7), (21,11), (22,11), (23,15), (24,15), (25,15), (26,18), (27,18), (28,18)]
     center = 8 # <-- Assign index of body part in center of skeleton (e.g., In-Motion 19/29: 8 for thorax)
-    bone_conns = [1, 4, 1, 1, 8, 8, 5, 6, 8, 8, 9, 10, 8, 12, 13, 14, 12, 16, 17] # <-- Assign parent (i.e., body part closer to the center) of each body part (e.g., In-Motion 19: [1, 4, 1, 1, 8, 8, 5, 6, 8, 8, 9, 10, 8, 12, 13, 14, 12, 16, 17], In-Motion 29: [1, 4, 1, 1, 8, 8, 5, 6, 8, 8, 9, 10, 8, 12, 13, 14, 12, 16, 17, 7, 7, 11, 11, 15, 15, 15, 18, 18, 18])
+    bone_conns = [1, 4, 1, 1, 8, 8, 5, 6, 8, 8, 9, 10, 8, 12, 13, 14, 12, 16, 17, 7, 7, 11, 11, 15, 15, 15, 18, 18, 18]
     thorax_index = 8 # <-- Assign index of thorax body part (e.g., In-Motion 19/29: 8)
     pelvis_index = 12 # <-- Assign index of pelvis body part (e.g., In-Motion 19/29: 12)
     use_mask = True 
@@ -100,7 +106,7 @@ if __name__ ==  '__main__':
     evaluation_save_preds = True
 
     #### Step 14: Set neural architecture search specific hyperparameters
-    k = 5
+    k = 1
     start_temperature = 10
     end_temperature = 1
     temperature_drop = 3
@@ -127,8 +133,8 @@ if __name__ ==  '__main__':
         'attention': ['null', 'channel', 'frame', 'joint'],
         'pool': ['global', 'spatial']
     }
-    search_train_dataset = 'train1'
-    search_val_dataset = 'val1'
+    search_train_dataset = 'train'
+    search_val_dataset = 'val'
     search_num_epochs = 100
     search_save_interval = 20000000
     search_save_preds = False 
@@ -162,14 +168,15 @@ if __name__ ==  '__main__':
     from utils.trainval import trainval
     from utils.test import test
     from utils.evaluate import evaluate as eval
+    from art import tprint
 
-
+    tprint(f"---New-Run---")
     """ Initialize search directory """
     search_dir = os.path.join(project_dir, 'searches', search_name)
     experiments_dir = os.path.join(search_dir, 'experiments')
     os.makedirs(search_dir, exist_ok=True)
     os.makedirs(experiments_dir, exist_ok=True)
-    processed_data_dir = os.path.join(project_dir, 'data', 'processed')
+    processed_data_dir = os.path.join(os.environ["HOME"], "..", "..", "data", "stud", "maxts", "data", "dim", "processed", "infants_resampled_smoothed")
 
 
     """ Store experiment hyperparameters """
@@ -285,6 +292,7 @@ if __name__ ==  '__main__':
         random_search = True
         random_candidate_num = 1
         population = []
+        pbar = tqdm(total = k, desc="Population: ")
         while len(population) < k:
 
             # Fetch unexplored candidate
@@ -302,12 +310,13 @@ if __name__ ==  '__main__':
             if performance >= performance_threshold:
                 population.append((candidate_string, performance, 'r' + str(random_candidate_num)))
                 population = sorted(population, key=lambda x: x[1])
+                pbar.update(1)
 
             # Print search status
             print_status(candidate_string, performance, 'r{0}'.format(random_candidate_num), best, best_performance, best_candidate_num, population)
 
             random_candidate_num += 1
-
+        pbar.close()
         # Update population with search for K best candidates
         if len(population) == k:
 
@@ -440,3 +449,4 @@ if __name__ ==  '__main__':
         ensemble_test_results['ensemble_test_window_balanced_accuracy'] = ensemble_window_balanced_accuracy
         with open(os.path.join(search_dir, 'ensemble_test_results.json'), 'w') as json_file:  
             json.dump(ensemble_test_results, json_file)
+

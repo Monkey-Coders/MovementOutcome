@@ -17,6 +17,7 @@ from tqdm import tqdm
 import pickle
 import copy
 import time
+from art import tprint
 
 from utils import graph, feeder, evaluate
 
@@ -264,7 +265,7 @@ class Operator():
         
         # Fetch training data of epoch
         loader = self.data_loader['train']
-        process = tqdm(loader)
+        process = tqdm(loader, desc="Fetch training data for epoch")
                         
         # Perform iterations of training
         loss_iterations = []
@@ -328,7 +329,7 @@ class Operator():
         self.val_writer.add_scalar('epoch', epoch, self.iteration)
         
         # Fetch validation data
-        process = tqdm(self.data_loader['val'])
+        process = tqdm(self.data_loader['val'], desc="Fetch validation data")
 
         # Perform validation over batches
         all_preds = []
@@ -421,8 +422,7 @@ class Operator():
         
         # Iterate over epochs
         num_epochs = self.hyperparameters['crossval']['crossval_num_epochs'] if self.crossval else self.hyperparameters['search']['search_num_epochs']
-        for epoch in range(num_epochs):
-
+        for epoch in tqdm(range(num_epochs), desc="Epoch #: "):
             # Train
             model_state_dict = self.train(epoch)
 
@@ -436,7 +436,7 @@ class Operator():
                         return self.best_auc
                 else:
                     break
-
+            
             # Save model weights
             save_model = ((epoch + 1) % (self.hyperparameters['crossval']['crossval_save_interval'] if self.crossval else self.hyperparameters['search']['search_save_interval']) == 0)
             if save_model:

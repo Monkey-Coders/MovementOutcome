@@ -13,7 +13,7 @@ def copy_coords_files(individual_names, from_dir, to_dir):
 
     # Copy files to new directory
     os.makedirs(to_dir, exist_ok=True)
-    for individual_name in tqdm(individual_names):
+    for individual_name in tqdm(individual_names, desc="Copy files to new directory"):
         shutil.copyfile(os.path.join(from_dir, 'orgcoords_' + individual_name + '.csv'), os.path.join(to_dir, individual_name + '.csv'))
 
         

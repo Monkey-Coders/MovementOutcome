@@ -362,7 +362,7 @@ def predict(coords_dir, coords_path):
                 target_layer = model.st_gcn_main[-1].tcn.nonlinearity
         
         # Fetch data
-        process = tqdm(individual_dataloader)
+        process = tqdm(individual_dataloader, desc="Fetch data, pred")
 
         # Perform evaluation over batches
         all_preds = []
@@ -502,5 +502,5 @@ if __name__ == '__main__':
             file_format = file.split('.')[1].lower()
             if file_format in ['csv']:
                 coords_names.append(file)
-    for coords_name in tqdm(coords_names):
+    for coords_name in tqdm(coords_names, desc="Predict cord"):
         predict(coords_dir, os.path.join(coords_dir, coords_name))

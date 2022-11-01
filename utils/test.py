@@ -175,7 +175,7 @@ class Operator():
         self.model.eval()
         
         # Fetch test data
-        process = tqdm(self.data_loader['test'])
+        process = tqdm(self.data_loader['test'], desc="Fetch test data")
 
         # Perform evaluation over batches
         all_preds = []
