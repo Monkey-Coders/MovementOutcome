@@ -34,7 +34,6 @@ def init_seed(seed=1):
 class Operator():
 
     def __init__(self, processed_data_dir, experiments_dir, candidate_num, candidate, hyperparameters, crossval_fold):
-        
         # Initialize processed data dir
         self.processed_data_dir = processed_data_dir
         

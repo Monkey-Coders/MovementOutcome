@@ -106,7 +106,7 @@ if __name__ ==  '__main__':
     evaluation_save_preds = True
 
     #### Step 14: Set neural architecture search specific hyperparameters
-    k = 1
+    k = 2
     start_temperature = 10
     end_temperature = 1
     temperature_drop = 3
@@ -136,7 +136,7 @@ if __name__ ==  '__main__':
     search_train_dataset = 'train'
     search_val_dataset = 'val'
     search_num_epochs = 100
-    search_save_interval = 20000000
+    search_save_interval = 5
     search_save_preds = False 
     search_critical_epochs = [10, 20, 30, 40, 50, 60, 70, 80, 90]
     search_critical_epoch_values = [0.75, 0.775, 0.8, 0.825, 0.85, 0.875, 0.9, 0.925, 0.95]
