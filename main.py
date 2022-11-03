@@ -271,6 +271,7 @@ if __name__ ==  '__main__':
 
 
     """ Neural architecture search """
+    print("Lets search boys")
 
     if search:
 

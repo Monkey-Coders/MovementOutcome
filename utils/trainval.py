@@ -446,6 +446,11 @@ class Operator():
         self.print_log('Best validation results: Loss-->{0:.5f}(epoch {1}) AUC-->{2:.5f}(epoch {3})'.format(self.best_loss, self.best_loss_epoch, self.best_auc, self.best_auc_epoch))
 
         return self.best_auc
+
+    def get_zero_cost_score(self, method):
+        import random
+        if method == "grad_norm":
+            return random.randint(0,9)
         
     def close(self):
         
@@ -476,7 +481,8 @@ class Operator():
         
         
 def trainval(processed_data_dir, experiments_dir, candidate_num, candidate, hyperparameters, crossval_fold):
-    
+    use_zero_cost = True
+    train = False
     # Initialize seeds
     init_seed(seed=hyperparameters['optimizer']['seed'])
     
@@ -484,9 +490,15 @@ def trainval(processed_data_dir, experiments_dir, candidate_num, candidate, hype
     operator = Operator(processed_data_dir, experiments_dir, candidate_num, candidate, hyperparameters, crossval_fold)
     
     # Run training and validation
-    auc = operator.start()
+    if use_zero_cost:
+        method = "grad_norm"
+        zc_score = operator.get_zero_cost_score(method=method)
+    if train:
+        auc = operator.start()
     
+    print(f"Zero cost score: {zc_score}")
     # Close operator
     operator.close()
-    
+    exit()
     return auc
+
