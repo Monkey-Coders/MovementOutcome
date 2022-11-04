@@ -112,8 +112,7 @@ if __name__ ==  '__main__':
     temperature_drop = 3
     performance_threshold = 0.9
     search_space = {
-        #'graph': ['spatial', 'dis2', 'dis4', 'dis4+2'],
-        'graph': ['spatial', 'dis2', 'dis4'],
+        'graph': ['spatial', 'dis2', 'dis4', 'dis4+2'],
         'input_width': [6, 8, 10, 12],
         'num_input_modules': [1, 2, 3],
         'initial_block_type': ['basic', 'bottleneck', 'mbconv'],

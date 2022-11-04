@@ -585,7 +585,7 @@ class st_gcn(nn.Module):
         super().__init__()
 
         assert len(kernel_size) == 2
-        assert kernel_size[0] % 2 == 1
+        assert int(kernel_size[0]) % 2 == 1
         padding = ((kernel_size[0] - 1) // 2, 0)
        
         
@@ -710,7 +710,27 @@ class Model(nn.Module):
         # input branches
         input_branches = []
         for n in range(self.num_input_branches):
-            input_branch_blocks = [st_gcn(self.input_channels_per_branch, input_width if initial_block_type=='mbconv' else input_width*bottleneck_factor, kernel_sizes[0], 1, dropout=dropout, reduction=bottleneck_factor, block_type=initial_block_type, inner_se_ratio=se_ratio if se_inner else 0, outer_se_ratio=se_ratio if se_outer else 0, temporal_scales=input_temporal_scales[0], expansion=bottleneck_factor, num_joints=self.num_joints, attention=attention, residual=initial_residual, swish_nonlinearity=swish_nonlinearity, **kwargs0)]
+            print("SEARCH:")
+            print(input_width, type(input_width))
+            print(bottleneck_factor, type(bottleneck_factor))
+            input_branch_blocks = [st_gcn(
+                self.input_channels_per_branch, 
+                int(input_width) if initial_block_type=='mbconv' else int(input_width)*int(bottleneck_factor), 
+                kernel_sizes[0], 
+                1, 
+                dropout=dropout, 
+                reduction=bottleneck_factor, 
+                block_type=initial_block_type, 
+                inner_se_ratio=se_ratio if se_inner else 0, 
+                outer_se_ratio=se_ratio if se_outer else 0, 
+                temporal_scales=input_temporal_scales[0], 
+                expansion=bottleneck_factor, 
+                num_joints=self.num_joints, 
+                attention=attention, 
+                residual=initial_residual, 
+                swish_nonlinearity=swish_nonlinearity, 
+                **kwargs0
+                )]
             for i in range(1, self.num_input_modules):
                 if i==1:
                     input_branch_block = st_gcn(input_width if initial_block_type=='mbconv' else input_width*bottleneck_factor, input_width if block_type=='mbconv' else input_width*bottleneck_factor, kernel_sizes[0], 1, dropout=dropout, reduction=bottleneck_factor, block_type=block_type, inner_se_ratio=se_ratio if se_inner else 0, outer_se_ratio=se_ratio if se_outer else 0, temporal_scales=input_temporal_scales[i], expansion=bottleneck_factor, num_joints=self.num_joints, attention=attention, residual=residual, swish_nonlinearity=swish_nonlinearity, **kwargs0)
