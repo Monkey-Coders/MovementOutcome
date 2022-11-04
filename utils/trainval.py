@@ -96,42 +96,32 @@ class Operator():
         self.init_data(seed=self.hyperparameters['optimizer']['seed'])
 
         # Initialize model
-        self.input_width = candidate['input_width']
-        self.num_input_modules = candidate['num_input_modules']
+        self.input_width = int(candidate['input_width'])
+        self.num_input_modules = int(candidate['num_input_modules'])
         self.initial_block_type = candidate['initial_block_type']
         self.initial_residual = candidate['initial_residual']
-        self.num_input_modules = candidate['num_input_modules']
-        self.num_input_modules = candidate['num_input_modules']
-        self.num_input_modules = candidate['num_input_modules']
         if candidate['input_temporal_scales'] == 'linear':
             self.input_temporal_scales = [i for i in range(1,int(self.num_input_modules)+1)]
         else:
-            print("INT ERROR")
-            print(candidate['input_temporal_scales'], type(candidate['input_temporal_scales']))
-            print(int(candidate['input_temporal_scales']), type(int(candidate['input_temporal_scales'])))
-            print(self.num_input_modules, type(self.num_input_modules))
-            self.input_temporal_scales = [int(candidate['input_temporal_scales']) for i in range(int(self.num_input_modules))]
-            print(self.input_temporal_scales)
-        self.initial_main_width = candidate['initial_main_width']
-        self.num_main_levels = candidate['num_main_levels']
-        self.num_main_level_modules = candidate['num_main_level_modules']
+            self.input_temporal_scales = [int(candidate['input_temporal_scales']) for i in range(self.num_input_modules)]
+        self.initial_main_width = int(candidate['initial_main_width'])
+        self.num_main_levels = int(candidate['num_main_levels'])
+        self.num_main_level_modules = int(candidate['num_main_level_modules'])
         self.block_type = candidate['block_type']
-        self.bottleneck_factor = candidate['bottleneck_factor']
+        self.bottleneck_factor = int(candidate['bottleneck_factor'])
         self.residual = candidate['residual']
-        self.main_temporal_scales = candidate['bottleneck_factor']
         if candidate['main_temporal_scales'] == 'linear':
-            self.main_temporal_scales = [i for i in range(1,int(self.num_main_levels)+1)]
+            self.main_temporal_scales = [i for i in range(1,self.num_main_levels+1)]
         else:
-            
-            self.main_temporal_scales = [int(candidate['main_temporal_scales']) for i in range(int(self.num_main_levels))]
-        self.temporal_kernel_size = candidate['temporal_kernel_size']
+            self.main_temporal_scales = [int(candidate['main_temporal_scales']) for i in range(self.num_main_levels)]
+        self.temporal_kernel_size = int(candidate['temporal_kernel_size'])
         self.se_outer = False
         self.se_inner = False
         if candidate['se'] in ['inner', 'both']:
             self.se_inner = True
         if candidate['se'] in ['outer', 'both']:
             self.se_outer = True
-        self.se_ratio = candidate['se_ratio']
+        self.se_ratio = int(candidate['se_ratio'])
         self.relative_se = True if candidate['se_type'] == 'relative' else False
         self.swish_nonlinearity = True if candidate['nonlinearity'] == 'swish' else False
         self.attention = candidate['attention']

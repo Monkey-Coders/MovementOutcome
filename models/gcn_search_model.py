@@ -585,7 +585,7 @@ class st_gcn(nn.Module):
         super().__init__()
 
         assert len(kernel_size) == 2
-        assert int(kernel_size[0]) % 2 == 1
+        assert kernel_size[0] % 2 == 1
         padding = ((kernel_size[0] - 1) // 2, 0)
        
         
@@ -710,12 +710,9 @@ class Model(nn.Module):
         # input branches
         input_branches = []
         for n in range(self.num_input_branches):
-            print("SEARCH:")
-            print(input_width, type(input_width))
-            print(bottleneck_factor, type(bottleneck_factor))
             input_branch_blocks = [st_gcn(
                 self.input_channels_per_branch, 
-                int(input_width) if initial_block_type=='mbconv' else int(input_width)*int(bottleneck_factor), 
+                input_width if initial_block_type=='mbconv' else input_width*bottleneck_factor, 
                 kernel_sizes[0], 
                 1, 
                 dropout=dropout, 
