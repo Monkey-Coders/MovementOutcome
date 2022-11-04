@@ -445,8 +445,35 @@ class Operator():
 
     def get_zero_cost_score(self, method):
         import random
+        batch_size = 1
         if method == "grad_norm":
-            return random.uniform(0,1)
+            self.model.train()
+            #model = copy.deepcopy(self.model.state_dict())
+            loader = self.data_loader['train']
+            process = iter(loader)
+            batch = next(process)
+            data, labels, video_ids, indices = batch
+            if self.hyperparameters['devices']['gpu_available']:
+                data = Variable(data.float().cuda(self.output_device), requires_grad=False) 
+                labels = Variable(labels.long().cuda(self.output_device), requires_grad=False)
+            else:
+                data = Variable(data.float(), requires_grad=False) 
+                labels = Variable(labels.long(), requires_grad=False)
+
+            
+            # Grad Norm
+            output, _ = self.model(data)
+            loss = self.loss(output, labels)
+            loss.backward()
+            grad_norm_arr = get_layer_metric_array(self.model, lambda l: l.weight.grad.norm() if l.weight.grad is not None else torch.zeros_like(l.weight), mode='param')
+            score = sum_arr(grad_norm_arr)
+            print("Score: ", score)
+        validation_results = {}
+        validation_results['grad_norm'] = score
+        with open(os.path.join(self.experiment_dir, 'zc_score.json'), 'w') as json_file:  
+            json.dump(validation_results, json_file)
+
+        return score
         
     def close(self):
         
@@ -498,3 +525,21 @@ def trainval(processed_data_dir, experiments_dir, candidate_num, candidate, hype
     operator.close()
     return zc_score
 
+
+def get_layer_metric_array(net, metric, mode): 
+    metric_array = []
+
+    for layer in net.modules():
+        if mode=='channel' and hasattr(layer,'dont_ch_prune'):
+            continue
+        if isinstance(layer, nn.Conv2d) or isinstance(layer, nn.Linear):
+            metric_array.append(metric(layer))
+    
+    return metric_array
+
+
+def sum_arr(arr):
+    sum = 0.
+    for i in range(len(arr)):
+        sum += torch.sum(arr[i])
+    return sum.item()
