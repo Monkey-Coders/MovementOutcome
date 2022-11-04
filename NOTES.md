@@ -1,11 +1,11 @@
 ### Give permission
-chmod +x main.py
+chmod +x sp2022.py
 ### Start script in background
-nohup python -u main.py > nohup.log &
+nohup python -u sp2022.py > nohup.log &
 ### End script
-ps ax | grep main.py
+ps ax | grep sp2022.py
 kill PID
 
 -- or --
 
-pkill -f main.py
+pkill -f sp2022.py

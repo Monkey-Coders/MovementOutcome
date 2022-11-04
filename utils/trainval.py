@@ -26,7 +26,7 @@ def init_seed(seed=1):
     torch.cuda.manual_seed_all(seed)
     torch.manual_seed(seed)
     np.random.seed(seed)
-    random.seed(seed)
+    #random.seed(seed)
     cudnn.deterministic = True
     cudnn.benchmark = False
 
@@ -106,7 +106,10 @@ class Operator():
         if candidate['input_temporal_scales'] == 'linear':
             self.input_temporal_scales = [i for i in range(1,self.num_input_modules+1)]
         else:
-            self.input_temporal_scales = [int(candidate['input_temporal_scales']) for i in range(self.num_input_modules)]
+            print(int(candidate['input_temporal_scales']))
+            print(candidate['input_temporal_scales'])
+            print(f"Self input modules: {self.num_input_modules}")
+            self.input_temporal_scales = [int(candidate['input_temporal_scales']) for i in range(int(self.num_input_modules))]
         self.initial_main_width = candidate['initial_main_width']
         self.num_main_levels = candidate['num_main_levels']
         self.num_main_level_modules = candidate['num_main_level_modules']
@@ -117,7 +120,7 @@ class Operator():
         if candidate['main_temporal_scales'] == 'linear':
             self.main_temporal_scales = [i for i in range(1,self.num_main_levels+1)]
         else:
-            self.main_temporal_scales = [int(candidate['main_temporal_scales']) for i in range(self.num_main_levels)]
+            self.main_temporal_scales = [int(candidate['main_temporal_scales']) for i in range(int(self.num_main_levels))]
         self.temporal_kernel_size = candidate['temporal_kernel_size']
         self.se_outer = False
         self.se_inner = False
@@ -450,7 +453,7 @@ class Operator():
     def get_zero_cost_score(self, method):
         import random
         if method == "grad_norm":
-            return random.randint(0,9)
+            return random.uniform(0,1)
         
     def close(self):
         
@@ -498,7 +501,7 @@ def trainval(processed_data_dir, experiments_dir, candidate_num, candidate, hype
     
     print(f"Zero cost score: {zc_score}")
     # Close operator
+
     operator.close()
-    exit()
-    return auc
+    return zc_score
 

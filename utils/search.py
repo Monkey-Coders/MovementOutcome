@@ -82,12 +82,12 @@ def get_candidate(search_space, candidate_history):
 
 
 def update_search_space(population, temperature):
-    
     # Determine contribution of each alternative in search space
     search_space_count = {}
     for n, (candidate_string, _, _) in enumerate(population, 1):
         structure = candidate_string.split('+')
         for pair in structure:
+            print(f"Pair: {pair}")
             choice, alternative = pair.split('-')
             if not choice in search_space_count.keys():
                 search_space_count[choice] = {}
