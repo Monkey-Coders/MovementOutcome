@@ -95,5 +95,35 @@
         "best_auc": 0.8736383442265795,
         "grad_norm": 82.53286743164062,
         "synflow": 0.0
+    },
+    "{'graph': 'spatial', 'input_width': '10', 'num_input_modules': '1', 'initial_block_type': 'basic', 'initial_residual': 'null', 'input_temporal_scales': '3', 'initial_main_width': '10', 'num_main_levels': '1', 'num_main_level_modules': '1', 'block_type': 'basic', 'bottleneck_factor': '4', 'residual': 'module', 'main_temporal_scales': '1', 'temporal_kernel_size': '7', 'se': 'inner', 'se_ratio': '4', 'se_type': 'relative', 'nonlinearity': 'relu', 'attention': 'channel', 'pool': 'spatial'}": {
+        "best_auc": 0.95425
+    },
+    "{'graph': 'dis2', 'input_width': '12', 'num_input_modules': '3', 'initial_block_type': 'basic', 'initial_residual': 'module', 'input_temporal_scales': 'linear', 'initial_main_width': '6', 'num_main_levels': '2', 'num_main_level_modules': '3', 'block_type': 'basic', 'bottleneck_factor': '4', 'residual': 'dense', 'main_temporal_scales': '3', 'temporal_kernel_size': '9', 'se': 'null', 'se_ratio': '4', 'se_type': 'relative', 'nonlinearity': 'relu', 'attention': 'null', 'pool': 'spatial'}": {
+        "best_auc": 0.94771
+    },
+    "{'graph': 'dis4+2', 'input_width': '12', 'num_input_modules': '3', 'initial_block_type': 'mbconv', 'initial_residual': 'module', 'input_temporal_scales': '1', 'initial_main_width': '10', 'num_main_levels': '1', 'num_main_level_modules': '1', 'block_type': 'basic', 'bottleneck_factor': '2', 'residual': 'block', 'main_temporal_scales': '3', 'temporal_kernel_size': '9', 'se': 'null', 'se_ratio': '2', 'se_type': 'relative', 'nonlinearity': 'relu', 'attention': 'channel', 'pool': 'spatial'}": {
+        "best_auc": 0.95207
+    },
+    "{'graph': 'dis2', 'input_width': '6', 'num_input_modules': '1', 'initial_block_type': 'basic', 'initial_residual': 'dense', 'input_temporal_scales': '3', 'initial_main_width': '10', 'num_main_levels': '2', 'num_main_level_modules': '2', 'block_type': 'basic', 'bottleneck_factor': '2', 'residual': 'dense', 'main_temporal_scales': 'linear', 'temporal_kernel_size': '9', 'se': 'outer', 'se_ratio': '4', 'se_type': 'absolute', 'nonlinearity': 'relu', 'attention': 'channel', 'pool': 'spatial'}": {
+        "best_auc": 0.96296
+    },
+    "{'graph': 'dis4', 'input_width': '6', 'num_input_modules': '1', 'initial_block_type': 'bottleneck', 'initial_residual': 'module', 'input_temporal_scales': '2', 'initial_main_width': '10', 'num_main_levels': '2', 'num_main_level_modules': '1', 'block_type': 'basic', 'bottleneck_factor': '2', 'residual': 'module', 'main_temporal_scales': 'linear', 'temporal_kernel_size': '7', 'se': 'null', 'se_ratio': '2', 'se_type': 'absolute', 'nonlinearity': 'relu', 'attention': 'channel', 'pool': 'global'}": {
+        "best_auc": 0.94118
+    },
+    "{'graph': 'spatial', 'input_width': '12', 'num_input_modules': '2', 'initial_block_type': 'mbconv', 'initial_residual': 'dense', 'input_temporal_scales': '3', 'initial_main_width': '10', 'num_main_levels': '1', 'num_main_level_modules': '2', 'block_type': 'mbconv', 'bottleneck_factor': '4', 'residual': 'block', 'main_temporal_scales': '2', 'temporal_kernel_size': '9', 'se': 'null', 'se_ratio': '2', 'se_type': 'relative', 'nonlinearity': 'swish', 'attention': 'null', 'pool': 'spatial'}": {
+        "best_auc": 0.96078
+    },
+    "{'graph': 'spatial', 'input_width': '8', 'num_input_modules': '2', 'initial_block_type': 'basic', 'initial_residual': 'block', 'input_temporal_scales': '1', 'initial_main_width': '8', 'num_main_levels': '1', 'num_main_level_modules': '1', 'block_type': 'basic', 'bottleneck_factor': '4', 'residual': 'module', 'main_temporal_scales': '3', 'temporal_kernel_size': '9', 'se': 'inner', 'se_ratio': '4', 'se_type': 'relative', 'nonlinearity': 'swish', 'attention': 'channel', 'pool': 'spatial'}": {
+        "best_auc": 0.96078
+    },
+    "{'graph': 'dis2', 'input_width': '10', 'num_input_modules': '2', 'initial_block_type': 'mbconv', 'initial_residual': 'null', 'input_temporal_scales': '2', 'initial_main_width': '6', 'num_main_levels': '1', 'num_main_level_modules': '1', 'block_type': 'mbconv', 'bottleneck_factor': '4', 'residual': 'block', 'main_temporal_scales': '3', 'temporal_kernel_size': '7', 'se': 'inner', 'se_ratio': '2', 'se_type': 'absolute', 'nonlinearity': 'relu', 'attention': 'channel', 'pool': 'spatial'}": {
+        "best_auc": 0.96514
+    },
+    "{'graph': 'dis4', 'input_width': '12', 'num_input_modules': '2', 'initial_block_type': 'bottleneck', 'initial_residual': 'block', 'input_temporal_scales': '3', 'initial_main_width': '12', 'num_main_levels': '2', 'num_main_level_modules': '1', 'block_type': 'mbconv', 'bottleneck_factor': '4', 'residual': 'dense', 'main_temporal_scales': '1', 'temporal_kernel_size': '5', 'se': 'inner', 'se_ratio': '4', 'se_type': 'absolute', 'nonlinearity': 'relu', 'attention': 'null', 'pool': 'spatial'}": {
+        "best_auc": 0.93028
+    },
+    "{'graph': 'spatial', 'input_width': '6', 'num_input_modules': '2', 'initial_block_type': 'mbconv', 'initial_residual': 'module', 'input_temporal_scales': '1', 'initial_main_width': '6', 'num_main_levels': '1', 'num_main_level_modules': '1', 'block_type': 'basic', 'bottleneck_factor': '2', 'residual': 'dense', 'main_temporal_scales': '1', 'temporal_kernel_size': '7', 'se': 'outer', 'se_ratio': '4', 'se_type': 'relative', 'nonlinearity': 'relu', 'attention': 'joint', 'pool': 'spatial'}": {
+        "best_auc": 0.91721
     }
 }
