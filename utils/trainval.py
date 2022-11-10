@@ -1,25 +1,29 @@
 # Inspired by https://github.com/lshiwjx/2s-AGCN/blob/master/main.py
 
+import copy
+import json
 import os
+import pickle
+import random
+import time
+from collections import OrderedDict
+
+import numpy as np
 import torch
 import torch.backends.cudnn as cudnn
 import torch.nn as nn
 import torch.optim as optim
+from art import tprint
+from tensorboardX import SummaryWriter
 from torch.autograd import Variable
 from torchprofile import profile_macs
 from torchviz import make_dot
-from tensorboardX import SummaryWriter
-from collections import OrderedDict
-import numpy as np
-import random
-import json
 from tqdm import tqdm
-import pickle
-import copy
-import time
-from art import tprint
+from utils_functions import get_layer_metric_array, sum_arr
+from zero_cost_proxies.grad_norm import calculate_grad_norm
+from zero_cost_proxies.synflow import calculate_synflow
 
-from utils import graph, feeder, evaluate
+from utils import evaluate, feeder, graph
 
 
 def init_seed(seed=1):
@@ -444,30 +448,15 @@ class Operator():
         return self.best_auc
 
     def get_zero_cost_score(self, method):
+        # TODO:
+        # Verify that this is correct - double check if we need to copy the model etc
         import random
         batch_size = 1
         if method == "grad_norm":
-            self.model.train()
-            #model = copy.deepcopy(self.model.state_dict())
-            loader = self.data_loader['train']
-            process = iter(loader)
-            batch = next(process)
-            data, labels, video_ids, indices = batch
-            if self.hyperparameters['devices']['gpu_available']:
-                data = Variable(data.float().cuda(self.output_device), requires_grad=False) 
-                labels = Variable(labels.long().cuda(self.output_device), requires_grad=False)
-            else:
-                data = Variable(data.float(), requires_grad=False) 
-                labels = Variable(labels.long(), requires_grad=False)
+            score = calculate_grad_norm(self.model, self.data_loader, self.hyperparameters, self.output_device, self.loss)
+        if method == "synflow":
+            score = calculate_synflow(self.model, self.data_loader, self.hyperparameters, self.output_device, self.loss)
 
-            
-            # Grad Norm
-            output, _ = self.model(data)
-            loss = self.loss(output, labels)
-            loss.backward()
-            grad_norm_arr = get_layer_metric_array(self.model, lambda l: l.weight.grad.norm() if l.weight.grad is not None else torch.zeros_like(l.weight), mode='param')
-            score = sum_arr(grad_norm_arr)
-            print("Score: ", score)
         validation_results = {}
         validation_results['grad_norm'] = score
         with open(os.path.join(self.experiment_dir, 'zc_score.json'), 'w') as json_file:  
@@ -501,11 +490,10 @@ class Operator():
         del self.optimizer
         if self.hyperparameters['devices']['gpu_available']:
             torch.cuda.empty_cache()
+        return validation_results
         
         
-def trainval(processed_data_dir, experiments_dir, candidate_num, candidate, hyperparameters, crossval_fold):
-    use_zero_cost = True
-    train = False
+def trainval(processed_data_dir, experiments_dir, candidate_num, candidate, hyperparameters, crossval_fold, train = False, zero_cost_method = None):
     # Initialize seeds
     init_seed(seed=hyperparameters['optimizer']['seed'])
     
@@ -513,33 +501,16 @@ def trainval(processed_data_dir, experiments_dir, candidate_num, candidate, hype
     operator = Operator(processed_data_dir, experiments_dir, candidate_num, candidate, hyperparameters, crossval_fold)
     
     # Run training and validation
-    if use_zero_cost:
-        method = "grad_norm"
-        zc_score = operator.get_zero_cost_score(method=method)
+    if zero_cost_method is not None:
+        zc_score = operator.get_zero_cost_score(method=zero_cost_method)
     if train:
         auc = operator.start()
-    
-    print(f"Zero cost score: {zc_score}")
+
     # Close operator
-
-    operator.close()
-    return zc_score
-
-
-def get_layer_metric_array(net, metric, mode): 
-    metric_array = []
-
-    for layer in net.modules():
-        if mode=='channel' and hasattr(layer,'dont_ch_prune'):
-            continue
-        if isinstance(layer, nn.Conv2d) or isinstance(layer, nn.Linear):
-            metric_array.append(metric(layer))
-    
-    return metric_array
+    validation_results = operator.close()
+    if train:
+        return auc, validation_results
+    else:
+        return zc_score, validation_results
 
 
-def sum_arr(arr):
-    sum = 0.
-    for i in range(len(arr)):
-        sum += torch.sum(arr[i])
-    return sum.item()

@@ -3,6 +3,7 @@ import torch.nn as nn
 import torch.nn.functional as F
 from torch.autograd import Variable
 import math
+import copy
 
 # https://github.com/narumiruna/efficientnet-pytorch/blob/master/efficientnet/models/efficientnet.py
 class Swish(nn.Module):
@@ -679,14 +680,45 @@ class Model(nn.Module):
             :math:`M_{in}` is the number of instance in a frame.
     """
 
-    def __init__(self, num_classes, graphs, input_channels=6, edge_importance_weighting=True, dropout=0.0, num_input_branches=3, 
-                 attention='null', spatial_pool=False, se_outer=False, se_inner=False, initial_residual='null', residual='dense', initial_block_type='basic', block_type='basic', input_width=16, initial_main_width=32, temporal_kernel_size=9, num_input_modules=3, num_main_levels=2, num_main_level_modules=2, input_temporal_scales=[1,1,1], main_temporal_scales=[1,1], bottleneck_factor=4, se_ratio=4, relative_se=False, swish_nonlinearity=False, **kwargs):
+    def __init__(self, num_classes, graphs, input_channels=6, edge_importance_weighting=True, 
+                dropout=0.0, num_input_branches=3, 
+                attention='null', spatial_pool=False, se_outer=False, se_inner=False, initial_residual='null', 
+                residual='dense', initial_block_type='basic', 
+                block_type='basic', input_width=16, initial_main_width=32, temporal_kernel_size=9, 
+                num_input_modules=3, num_main_levels=2, num_main_level_modules=2, 
+                input_temporal_scales=[1,1,1], main_temporal_scales=[1,1], bottleneck_factor=4, 
+                se_ratio=4, relative_se=False, swish_nonlinearity=False, **kwargs):
         super().__init__()
         self.input_channels_per_branch = input_channels // num_input_branches
         self.spatial_pool = spatial_pool
         self.swish_nonlinearity = swish_nonlinearity
         self.num_input_branches = num_input_branches
         self.num_input_modules = num_input_modules
+        self.num_classes = num_classes
+        self.input_channels = input_channels
+        self.edge_importance_weighting = edge_importance_weighting
+        self.dropout = dropout
+        self.attention = attention
+        self.se_outer = se_outer
+        self.se_inner = se_inner
+        self.initial_residual = initial_residual
+        self.residual = residual
+        self.initial_block_type = initial_block_type
+        self.block_type = block_type
+        self.input_width = input_width
+        self.initial_main_width = initial_main_width
+        self.temporal_kernel_size = temporal_kernel_size
+        self.num_main_levels = num_main_levels
+        self.num_main_level_modules = num_main_level_modules
+        self.input_temporal_scales = input_temporal_scales
+        self.main_temporal_scales = main_temporal_scales
+        self.bottleneck_factor = bottleneck_factor
+        self.se_ratio = se_ratio
+        self.relative_se = relative_se
+        
+
+
+
 
         # graphs and kernel sizes
         self.graphs = graphs
@@ -787,6 +819,36 @@ class Model(nn.Module):
         
         self.fcn = nn.Conv2d(level_input_width, num_classes, kernel_size=1)
         nn.init.kaiming_normal_(self.fcn.weight, mode='fan_out', nonlinearity='linear')
+    '''
+    (self, num_classes, graphs, input_channels=6, 
+    edge_importance_weighting=True, dropout=0.0, num_input_branches=3, 
+    attention='null', spatial_pool=False, se_outer=False, se_inner=False,
+    initial_residual='null', residual='dense', initial_block_type='basic',
+    block_type='basic', input_width=16, initial_main_width=32, temporal_kernel_size=9,
+    num_input_modules=3, num_main_levels=2, num_main_level_modules=2, 
+    input_temporal_scales=[1,1,1], main_temporal_scales=[1,1], 
+    bottleneck_factor=4, se_ratio=4, relative_se=False, 
+    swish_nonlinearity=False, **kwargs):
+    '''
+    def get_copy(self):
+
+        # model_new = Network(self.spec, self.stem_out, self.num_stacks, self.num_mods, self.num_classes, bn=bn)
+        model_new = Model(num_classes=self.num_classes, graphs=self.graphs, input_channels=self.input_channels,
+            edge_importance_weighting=self.edge_importance_weighting, dropout=self.dropout, 
+            num_input_branches=self.num_input_branches, attention=self.attention,
+            spatial_pool=self.spatial_pool, se_outer=self.se_outer, se_inner=self.se_inner,
+            initial_residual=self.initial_residual, residual=self.residual,
+            initial_block_type=self.initial_block_type, block_type=self.block_type,
+            input_width=self.input_width, initial_main_width=self.initial_main_width,
+            temporal_kernel_size=self.temporal_kernel_size, num_input_modules=self.num_input_modules,
+            num_main_levels=self.num_main_levels, num_main_level_modules=self.num_main_level_modules,
+            input_temporal_scales=self.input_temporal_scales, main_temporal_scales=self.main_temporal_scales,
+            bottleneck_factor=self.bottleneck_factor, se_ratio=self.se_ratio,
+            relative_se=self.relative_se, swish_nonlinearity=self.swish_nonlinearity)
+        
+        model_new.load_state_dict(self.state_dict(), strict=False)
+
+        return model_new
 
     def forward(self, x):
 
