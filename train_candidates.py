@@ -250,8 +250,6 @@ for candidate_key, values in candidate_dict.items():
         score, _ = trainval(processed_data_dir, experiments_dir, candidate_num, candidate, hyperparameters, crossval_fold=None, train=False, zero_cost_method = "snip")
         results["snip"] = score
 
-    print(results)
-    exit()
     candidate_needs_grad_norm = "grad_norm" not in results
     if candidate_needs_grad_norm:
         score, _ = trainval(processed_data_dir, experiments_dir, candidate_num, candidate, hyperparameters, crossval_fold=None, train=False, zero_cost_method = "grad_norm")

@@ -847,7 +847,6 @@ class Model(nn.Module):
             relative_se=self.relative_se, swish_nonlinearity=self.swish_nonlinearity)
         
         model_new.load_state_dict(self.state_dict(), strict=False)
-
         return model_new
 
     def forward(self, x):

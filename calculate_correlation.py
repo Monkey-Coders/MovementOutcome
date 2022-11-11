@@ -6,24 +6,24 @@ with open("zero_cost_experiments/results.json") as file:
 
 auc = []
 grad_norm = []
-num_flops = []
+snip = []
 for model in results:
     model_stats = results[model]
-    auc.append(model_stats["val_accuracy"])
+    auc.append(model_stats["best_auc"])
     grad_norm.append(model_stats["grad_norm"])
-    num_flops.append(model_stats["num_flops"])
+    snip.append(model_stats["snip"])
 
 #print(auc)
 #print(grad_norm)
 
 spearman_rank_grad_norm = stats.spearmanr(auc, grad_norm)
-spearman_rank_num_flops = stats.spearmanr(auc, num_flops)
+spearman_rank_snip = stats.spearmanr(auc, snip)
 print("="*80)
 print("Spearman rank for grad norm")
 print(spearman_rank_grad_norm)
 print("="*80)
-print("Spearman rank for num flops")
-print(spearman_rank_num_flops)
+print("Spearman rank for snip")
+print(spearman_rank_snip)
 print("="*80)
 
 
