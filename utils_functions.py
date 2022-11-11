@@ -6,6 +6,7 @@ import os
 from utils import graph
 import torch
 import torch.nn as nn
+from torch.autograd import Variable
 
 
 
@@ -128,3 +129,34 @@ def sum_arr(arr):
     for i in range(len(arr)):
         sum += torch.sum(arr[i])
     return sum.item()
+
+def get_score(net, metric, mode):
+    metric_array = get_layer_metric_array(net, metric, mode)
+    return sum_arr(metric_array)
+
+def initialise_zero_cost_proxy(net, data_loader, hyperparameters, output_device, eval = False, train = True,  single_batch = True):
+    device = torch.device('cuda:0' if torch.cuda.is_available() else 'cpu')
+    model = net.get_copy().to(device)
+    model.zero_grad()
+    if train:
+        model.train()
+    if eval:
+        model.eval()
+    
+    loader = data_loader["train"]
+
+    if single_batch:
+        process = iter(loader)
+        batch = next(process)
+        data, labels, video_ids, indices = batch
+    
+    if hyperparameters['devices']['gpu_available']:
+        data = Variable(data.float().cuda(output_device), requires_grad=False) 
+        labels = Variable(labels.long().cuda(output_device), requires_grad=False)
+    else:
+        data = Variable(data.float(), requires_grad=False) 
+        labels = Variable(labels.long(), requires_grad=False)
+
+    return model, data, labels, loader
+
+

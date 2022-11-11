@@ -2,7 +2,7 @@ import numpy as np
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-from utils_functions import sum_arr, get_layer_metric_array
+from utils_functions import initialise_zero_cost_proxy, get_score
 from torch.autograd import Variable
 
 import types
@@ -15,8 +15,7 @@ def snip_forward_linear(self, x):
         return F.linear(x, self.weight * self.weight_mask, self.bias)
 
 def calculate_snip(net, data_loader, hyperparameters, output_device, loss_function ):
-    model = net.get_copy().to("cuda")
-    model.train()
+    model, data, labels, loader = initialise_zero_cost_proxy(net, data_loader, hyperparameters, output_device)
 
     for layer in model.modules():
         if isinstance(layer, nn.Conv2d) or isinstance(layer, nn.Linear):
@@ -28,18 +27,7 @@ def calculate_snip(net, data_loader, hyperparameters, output_device, loss_functi
         if isinstance(layer, nn.Linear):
             layer.forward = types.MethodType(snip_forward_linear, layer)
 
-    model.zero_grad()
-    loader = data_loader['train']
-    process = iter(loader)
-    batch = next(process)
-    data, labels, video_ids, indices = batch
     N = data.shape[0]
-    if hyperparameters['devices']['gpu_available']:
-        data = Variable(data.float().cuda(output_device), requires_grad=False) 
-        labels = Variable(labels.long().cuda(output_device), requires_grad=False)
-    else:
-        data = Variable(data.float(), requires_grad=False) 
-        labels = Variable(labels.long(), requires_grad=False)
     
     outputs, _ = model.forward(data)
     loss = loss_function(outputs, labels)
@@ -51,8 +39,7 @@ def calculate_snip(net, data_loader, hyperparameters, output_device, loss_functi
         else:
             return torch.zeros_like(layer.weight)
     
-    grad_abs = get_layer_metric_array(model, snip, "param")
-    sum = sum_arr(grad_abs)
+    score = get_score(model, snip, "param")
 
-    return sum
+    return score
    
