@@ -130,8 +130,10 @@ def sum_arr(arr):
         sum += torch.sum(arr[i])
     return sum.item()
 
-def get_score(net, metric, mode):
+def get_score(net, metric, mode, is_jacob_cov = False):
     metric_array = get_layer_metric_array(net, metric, mode)
+    if is_jacob_cov:
+        return metric_array
     return sum_arr(metric_array)
 
 def initialise_zero_cost_proxy(net, data_loader, hyperparameters, output_device, eval = False, train = True,  single_batch = True):

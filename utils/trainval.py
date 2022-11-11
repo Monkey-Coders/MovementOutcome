@@ -21,6 +21,7 @@ from torchviz import make_dot
 from tqdm import tqdm
 from utils_functions import get_layer_metric_array, sum_arr
 from zero_cost_proxies.grad_norm import calculate_grad_norm
+from zero_cost_proxies.grasp import calculate_grasp
 from zero_cost_proxies.synflow import calculate_synflow
 from zero_cost_proxies.snip import calculate_snip
 
@@ -453,20 +454,14 @@ class Operator():
         return self.best_auc
 
     def get_zero_cost_score(self, method):
-        # TODO:
-        # Verify that this is correct - double check if we need to copy the model etc
-        import random
-        batch_size = 1
         if method == "grad_norm":
             score = calculate_grad_norm(self.model, self.data_loader, self.hyperparameters, self.output_device, self.loss)
         if method == "synflow":
             score = calculate_synflow(self.model, self.data_loader, self.hyperparameters, self.output_device, self.loss)
         if method == "snip":
             score = calculate_snip(self.model, self.data_loader, self.hyperparameters, self.output_device, self.loss)
-        validation_results = {}
-        validation_results['grad_norm'] = score
-        with open(os.path.join(self.experiment_dir, 'zc_score.json'), 'w') as json_file:  
-            json.dump(validation_results, json_file)
+        if method == "grasp":
+            score = calculate_grasp(self.model, self.data_loader, self.hyperparameters, self.output_device, self.loss)
 
         return score
         

@@ -233,26 +233,18 @@ with open(PATH) as f:
     candidate_dict = json.load(f)
 
 counter = 0
+
+measurements = ["synflow", "snip", "grad_norm"]
 for candidate_key, values in candidate_dict.items():
     candidate_num = counter
     candidate = eval(candidate_key)
 
     results = candidate_dict[candidate_key]
-    candidate_needs_synflow = "synflow" not in results
     
-    if candidate_needs_synflow:
-        score, _ = trainval(processed_data_dir, experiments_dir, candidate_num, candidate, hyperparameters, crossval_fold=None, train=False, zero_cost_method = "synflow")
-        results["synflow"] = score
-
-    candidate_needs_snip = "snip" not in results
-    if candidate_needs_snip:
-        score, _ = trainval(processed_data_dir, experiments_dir, candidate_num, candidate, hyperparameters, crossval_fold=None, train=False, zero_cost_method = "snip")
-        results["snip"] = score
-
-    candidate_needs_grad_norm = "grad_norm" not in results
-    if candidate_needs_grad_norm:
-        score, _ = trainval(processed_data_dir, experiments_dir, candidate_num, candidate, hyperparameters, crossval_fold=None, train=False, zero_cost_method = "grad_norm")
-        results["grad_norm"] = score
+    for measurement in measurements:
+        if measurement not in results:
+            score, _ = trainval(processed_data_dir, experiments_dir, candidate_num, candidate, hyperparameters, crossval_fold=None, train=False, zero_cost_method = measurement)
+            results[measurement] = score
 
     candidate_needs_to_train = "best_auc" not in results
     if candidate_needs_to_train:
