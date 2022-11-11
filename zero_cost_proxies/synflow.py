@@ -1,7 +1,7 @@
 import torch
 from utils_functions import sum_arr, get_layer_metric_array
 
-torch.set_default_dtype(torch.float64)
+# torch.set_default_dtype(torch.float64)
 
 def calculate_synflow(model, data_loader, hyperparameters, output_device, loss_function ):
     device = torch.device('cuda:0' if torch.cuda.is_available() else 'cpu')
@@ -28,19 +28,21 @@ def calculate_synflow(model, data_loader, hyperparameters, output_device, loss_f
     signs = linearize(new_model)
 
     model.zero_grad()
-    model.double()
+    model = model.float()
+
+    for param in model.parameters():
+        print(param.dtype)
+
     process = iter(loader)
     batch = next(process)
     data, labels, video_ids, indices = batch
 
     input_dim = list(data[0,:].shape)
-    data = torch.ones([1] + input_dim).double().to(device)
-    # data = torch.ones([1] + input_dim).to(device)
+    data = torch.ones([1] + input_dim).float().to(device)
     print(data.dtype)
     print(data.shape)
 
     # data = data.double()
-    print(data.dtype)
     output, _ = new_model.forward(data)
     torch.sum(output).backward()
 
@@ -52,7 +54,6 @@ def calculate_synflow(model, data_loader, hyperparameters, output_device, loss_f
             print("Weight grad")
             return torch.abs(layer.weight * layer.weight.grad)
         else:
-            print("Zeroes :( ")
             return torch.zeros_like(layer.weight)
     
     grad_abs = get_layer_metric_array(model, synflow, mode='param' )

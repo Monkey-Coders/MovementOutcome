@@ -232,6 +232,56 @@ else:
 with open(PATH) as f:
     candidate_dict = json.load(f)
 
+counter = 0
+for candidate_key, values in candidate_dict.items():
+    candidate_num = counter
+    candidate = eval(candidate_key)
+
+    results = candidate_dict[candidate_key]
+    """candidate_needs_synflow = "synflow" not in results
+    
+    if candidate_needs_synflow:
+        score, _ = trainval(processed_data_dir, experiments_dir, candidate_num, candidate, hyperparameters, crossval_fold=None, train=False, zero_cost_method = "synflow")
+        results["synflow"] = score
+    """
+
+    candidate_needs_snip = "snip" not in results
+    if candidate_needs_snip:
+        score, _ = trainval(processed_data_dir, experiments_dir, candidate_num, candidate, hyperparameters, crossval_fold=None, train=False, zero_cost_method = "snip")
+        results["snip"] = score
+
+    print(results)
+    exit()
+    candidate_needs_grad_norm = "grad_norm" not in results
+    if candidate_needs_grad_norm:
+        score, _ = trainval(processed_data_dir, experiments_dir, candidate_num, candidate, hyperparameters, crossval_fold=None, train=False, zero_cost_method = "grad_norm")
+        results["grad_norm"] = score
+
+    candidate_needs_to_train = "best_auc" not in results
+    if candidate_needs_to_train:
+        print("="*100)
+        print(f"Training candidate: {counter}")
+        performance, validation_results = trainval(processed_data_dir, experiments_dir, candidate_num, candidate, hyperparameters, crossval_fold=None, train=True, use_zero_cost=False)
+        results["val_accuracy"] = performance
+        results["num_parameters"] = validation_results["num_parameters"]
+        results["num_flops"] = validation_results["num_flops"]
+        results["best_loss"] = validation_results["best_loss"]
+        results["best_auc"] = validation_results["best_auc"]
+        print(f"Performance: {performance}")
+        print("="*100)
+        print(f"Finished training candidate: {counter}")
+        print("="*100)
+    
+
+    candidate_dict[candidate_key] = results
+    print("Writing results to file")
+    with open(PATH, "w") as f:
+        json.dump(candidate_dict, f)
+    counter += 1
+
+
+exit()
+
 
 for month in os.listdir(base_path):
     for date in os.listdir(f"{base_path}/{month}"):

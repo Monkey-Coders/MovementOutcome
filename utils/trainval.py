@@ -22,6 +22,7 @@ from tqdm import tqdm
 from utils_functions import get_layer_metric_array, sum_arr
 from zero_cost_proxies.grad_norm import calculate_grad_norm
 from zero_cost_proxies.synflow import calculate_synflow
+from zero_cost_proxies.snip import calculate_snip
 
 from utils import evaluate, feeder, graph
 
@@ -224,7 +225,7 @@ class Operator():
         # Compute number of floating point operations
         dummy_data = torch.from_numpy(np.zeros((2, self.input_channels, self.hyperparameters['model']['input_temporal_resolution'], self.hyperparameters['model']['input_spatial_resolution']))).float()
         if self.hyperparameters['devices']['gpu_available']:
-            dummy_data = dummy_data.double().cuda(self.output_device)
+            dummy_data = dummy_data.cuda(self.output_device)
         
         if is_double:
             dummy_data = dummy_data.double()
@@ -460,7 +461,8 @@ class Operator():
             score = calculate_grad_norm(self.model, self.data_loader, self.hyperparameters, self.output_device, self.loss)
         if method == "synflow":
             score = calculate_synflow(self.model, self.data_loader, self.hyperparameters, self.output_device, self.loss)
-
+        if method == "snip":
+            score = calculate_snip(self.model, self.data_loader, self.hyperparameters, self.output_device, self.loss)
         validation_results = {}
         validation_results['grad_norm'] = score
         with open(os.path.join(self.experiment_dir, 'zc_score.json'), 'w') as json_file:  
