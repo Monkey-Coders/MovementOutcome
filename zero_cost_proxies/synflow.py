@@ -6,7 +6,7 @@ torch.set_default_dtype(torch.float64)
 def calculate_synflow(model, data_loader, hyperparameters, output_device, loss_function ):
     device = torch.device('cuda:0' if torch.cuda.is_available() else 'cpu')
     new_model = model.get_copy().to(device)
-    # new_model.eval()
+    new_model.eval()
     #new_model.train()
     loader = data_loader['train']
 
@@ -29,20 +29,22 @@ def calculate_synflow(model, data_loader, hyperparameters, output_device, loss_f
 
     model.zero_grad()
     model.double()
-
     process = iter(loader)
     batch = next(process)
     data, labels, video_ids, indices = batch
 
     input_dim = list(data[0,:].shape)
     data = torch.ones([1] + input_dim).double().to(device)
+    # data = torch.ones([1] + input_dim).to(device)
     print(data.dtype)
     print(data.shape)
 
-    data = data.double()
+    # data = data.double()
     print(data.dtype)
     output, _ = new_model.forward(data)
     torch.sum(output).backward()
+
+
     
 
     def synflow(layer):

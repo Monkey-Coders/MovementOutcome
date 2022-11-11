@@ -51,7 +51,6 @@ class Operator():
         else:
             self.experiment_dir = os.path.join(experiments_dir, 'search_{0}'.format(candidate_num))
         os.makedirs(self.experiment_dir, exist_ok=True)
-        
         # Initialize hyperparameters and candidate
         self.hyperparameters = hyperparameters
         self.candidate = candidate
@@ -203,14 +202,15 @@ class Operator():
             drop_last=False,
             worker_init_fn=init_seed(seed))
 
-    def init_model(self):
+    def init_model(self, is_double = False):
         
         # Set main processing unit
         self.output_device = int(self.hyperparameters['devices']['output_device'])
-        
         # Initialize model
         model = __import__(self.hyperparameters['model']['model_script'], fromlist=['object'])
         self.model = model.Model(num_classes=2, graphs=[self.graph_input, self.graph_main] if len(self.labeling_mode) == 2 else [self.graph_input], input_channels=self.input_channels, edge_importance_weighting=self.hyperparameters['model']['edge_importance_weighting'], dropout=self.hyperparameters['model']['dropout'], num_input_branches=self.hyperparameters['model']['num_input_branches'], attention=self.attention, se_outer=self.se_outer, se_inner=self.se_inner, initial_residual=self.initial_residual, residual=self.residual, initial_block_type=self.initial_block_type, block_type=self.block_type, input_width=self.input_width, initial_main_width=self.initial_main_width, temporal_kernel_size=self.temporal_kernel_size, num_input_modules=self.num_input_modules, num_main_levels=self.num_main_levels, num_main_level_modules=self.num_main_level_modules, input_temporal_scales=self.input_temporal_scales, main_temporal_scales=self.main_temporal_scales, bottleneck_factor=self.bottleneck_factor, se_ratio=self.se_ratio, relative_se=self.relative_se, swish_nonlinearity=self.swish_nonlinearity, spatial_pool=self.spatial_pool)
+        if is_double:
+            self.model.double()
         if self.hyperparameters['devices']['gpu_available']:
             self.model = self.model.cuda(self.output_device)
         
@@ -224,7 +224,11 @@ class Operator():
         # Compute number of floating point operations
         dummy_data = torch.from_numpy(np.zeros((2, self.input_channels, self.hyperparameters['model']['input_temporal_resolution'], self.hyperparameters['model']['input_spatial_resolution']))).float()
         if self.hyperparameters['devices']['gpu_available']:
-            dummy_data = dummy_data.cuda(self.output_device)
+            dummy_data = dummy_data.double().cuda(self.output_device)
+        
+        if is_double:
+            dummy_data = dummy_data.double()
+
         macs = profile_macs(self.model, dummy_data) // 2
         self.num_flops = int(macs*2)
         self.print_log("Number of FLOPs per sample: {0}".format(self.num_flops))
@@ -496,12 +500,11 @@ class Operator():
 def trainval(processed_data_dir, experiments_dir, candidate_num, candidate, hyperparameters, crossval_fold, train = False, zero_cost_method = None):
     # Initialize seeds
     init_seed(seed=hyperparameters['optimizer']['seed'])
-    
     # Initialize operator
     operator = Operator(processed_data_dir, experiments_dir, candidate_num, candidate, hyperparameters, crossval_fold)
-    
     # Run training and validation
     if zero_cost_method is not None:
+        print(zero_cost_method)
         zc_score = operator.get_zero_cost_score(method=zero_cost_method)
     if train:
         auc = operator.start()
