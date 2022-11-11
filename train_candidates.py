@@ -238,12 +238,11 @@ for candidate_key, values in candidate_dict.items():
     candidate = eval(candidate_key)
 
     results = candidate_dict[candidate_key]
-    """candidate_needs_synflow = "synflow" not in results
+    candidate_needs_synflow = "synflow" not in results
     
     if candidate_needs_synflow:
         score, _ = trainval(processed_data_dir, experiments_dir, candidate_num, candidate, hyperparameters, crossval_fold=None, train=False, zero_cost_method = "synflow")
         results["synflow"] = score
-    """
 
     candidate_needs_snip = "snip" not in results
     if candidate_needs_snip:
