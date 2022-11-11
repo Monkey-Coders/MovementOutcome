@@ -24,6 +24,7 @@ from zero_cost_proxies.grad_norm import calculate_grad_norm
 from zero_cost_proxies.grasp import calculate_grasp
 from zero_cost_proxies.synflow import calculate_synflow
 from zero_cost_proxies.snip import calculate_snip
+from zero_cost_proxies.fisher import calculate_fisher
 
 from utils import evaluate, feeder, graph
 
@@ -462,6 +463,8 @@ class Operator():
             score = calculate_snip(self.model, self.data_loader, self.hyperparameters, self.output_device, self.loss)
         if method == "grasp":
             score = calculate_grasp(self.model, self.data_loader, self.hyperparameters, self.output_device, self.loss)
+        if method == "fisher":
+            score = calculate_fisher(self.model, self.data_loader, self.hyperparameters, self.output_device, self.loss)
 
         return score
         
