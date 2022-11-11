@@ -23,6 +23,7 @@ from utils_functions import get_layer_metric_array, sum_arr
 from zero_cost_proxies.grad_norm import calculate_grad_norm
 from zero_cost_proxies.synflow import calculate_synflow
 from zero_cost_proxies.snip import calculate_snip
+from zero_cost_proxies.fisher import calculate_fisher
 
 from utils import evaluate, feeder, graph
 
@@ -463,6 +464,8 @@ class Operator():
             score = calculate_synflow(self.model, self.data_loader, self.hyperparameters, self.output_device, self.loss)
         if method == "snip":
             score = calculate_snip(self.model, self.data_loader, self.hyperparameters, self.output_device, self.loss)
+        if method == "fisher":
+            score = calculate_fisher(self.model, self.data_loader, self.hyperparameters, self.output_device, self.loss)
         validation_results = {}
         validation_results['grad_norm'] = score
         with open(os.path.join(self.experiment_dir, 'zc_score.json'), 'w') as json_file:  

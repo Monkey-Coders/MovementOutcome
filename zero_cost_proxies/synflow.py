@@ -38,6 +38,8 @@ def calculate_synflow(net, data_loader, hyperparameters, output_device, loss_fun
         else:
             return torch.zeros_like(layer.weight)
 
+    nonlinearize(net, signs)
     score = get_score(model, synflow, "param")
+
     return score
 

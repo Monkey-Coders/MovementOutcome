@@ -238,8 +238,13 @@ for candidate_key, values in candidate_dict.items():
     candidate = eval(candidate_key)
 
     results = candidate_dict[candidate_key]
+
+    candidate_needs_fisher = "fisher" not in results
+    if candidate_needs_fisher:
+        score, _ = trainval(processed_data_dir, experiments_dir, candidate_num, candidate, hyperparameters, crossval_fold=None, train=False, zero_cost_method = "fisher")
+        results["fisher"] = score
+
     candidate_needs_synflow = "synflow" not in results
-    
     if candidate_needs_synflow:
         score, _ = trainval(processed_data_dir, experiments_dir, candidate_num, candidate, hyperparameters, crossval_fold=None, train=False, zero_cost_method = "synflow")
         results["synflow"] = score
