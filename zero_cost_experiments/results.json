@@ -6,7 +6,8 @@
         "grad_norm": 906.943359375,
         "fisher": 1718.0228271484375,
         "grasp": -53765.89453125,
-        "flops": 1161292216
+        "flops": 1161292216,
+        "params": 258202
     },
     "{'graph': 'dis2', 'input_width': '12', 'num_input_modules': '3', 'initial_block_type': 'basic', 'initial_residual': 'module', 'input_temporal_scales': 'linear', 'initial_main_width': '6', 'num_main_levels': '2', 'num_main_level_modules': '3', 'block_type': 'basic', 'bottleneck_factor': '4', 'residual': 'dense', 'main_temporal_scales': '3', 'temporal_kernel_size': '9', 'se': 'null', 'se_ratio': '4', 'se_type': 'relative', 'nonlinearity': 'relu', 'attention': 'null', 'pool': 'spatial'}": {
         "best_auc": 0.94771,
@@ -15,7 +16,8 @@
         "grad_norm": 5439.349609375,
         "fisher": 25350.2734375,
         "grasp": -700697.0,
-        "flops": 4596044026
+        "flops": 4596044026,
+        "params": 1028036
     },
     "{'graph': 'dis4+2', 'input_width': '12', 'num_input_modules': '3', 'initial_block_type': 'mbconv', 'initial_residual': 'module', 'input_temporal_scales': '1', 'initial_main_width': '10', 'num_main_levels': '1', 'num_main_level_modules': '1', 'block_type': 'basic', 'bottleneck_factor': '2', 'residual': 'block', 'main_temporal_scales': '3', 'temporal_kernel_size': '9', 'se': 'null', 'se_ratio': '2', 'se_type': 'relative', 'nonlinearity': 'relu', 'attention': 'channel', 'pool': 'spatial'}": {
         "best_auc": 0.95207,
@@ -24,7 +26,8 @@
         "grad_norm": 820.4971313476562,
         "fisher": 274.2256164550781,
         "grasp": -38902.16015625,
-        "flops": 478840750
+        "flops": 478840750,
+        "params": 133230
     },
     "{'graph': 'dis2', 'input_width': '6', 'num_input_modules': '1', 'initial_block_type': 'basic', 'initial_residual': 'dense', 'input_temporal_scales': '3', 'initial_main_width': '10', 'num_main_levels': '2', 'num_main_level_modules': '2', 'block_type': 'basic', 'bottleneck_factor': '2', 'residual': 'dense', 'main_temporal_scales': 'linear', 'temporal_kernel_size': '9', 'se': 'outer', 'se_ratio': '4', 'se_type': 'absolute', 'nonlinearity': 'relu', 'attention': 'channel', 'pool': 'spatial'}": {
         "best_auc": 0.96296,
@@ -33,7 +36,8 @@
         "grad_norm": 1757.3746337890625,
         "fisher": 6101.2001953125,
         "grasp": -144111.1875,
-        "flops": 336703664
+        "flops": 336703664,
+        "params": 190281
     },
     "{'graph': 'dis4', 'input_width': '6', 'num_input_modules': '1', 'initial_block_type': 'bottleneck', 'initial_residual': 'module', 'input_temporal_scales': '2', 'initial_main_width': '10', 'num_main_levels': '2', 'num_main_level_modules': '1', 'block_type': 'basic', 'bottleneck_factor': '2', 'residual': 'module', 'main_temporal_scales': 'linear', 'temporal_kernel_size': '7', 'se': 'null', 'se_ratio': '2', 'se_type': 'absolute', 'nonlinearity': 'relu', 'attention': 'channel', 'pool': 'global'}": {
         "best_auc": 0.94118,
@@ -42,7 +46,8 @@
         "grad_norm": 43.38821792602539,
         "fisher": 2.8901219367980957,
         "grasp": -13.017105102539062,
-        "flops": 145577774
+        "flops": 145577774,
+        "params": 71700
     },
     "{'graph': 'spatial', 'input_width': '12', 'num_input_modules': '2', 'initial_block_type': 'mbconv', 'initial_residual': 'dense', 'input_temporal_scales': '3', 'initial_main_width': '10', 'num_main_levels': '1', 'num_main_level_modules': '2', 'block_type': 'mbconv', 'bottleneck_factor': '4', 'residual': 'block', 'main_temporal_scales': '2', 'temporal_kernel_size': '9', 'se': 'null', 'se_ratio': '2', 'se_type': 'relative', 'nonlinearity': 'swish', 'attention': 'null', 'pool': 'spatial'}": {
         "best_auc": 0.96078,
@@ -51,7 +56,8 @@
         "grad_norm": 261.18878173828125,
         "fisher": 11.744089126586914,
         "grasp": -1079.421630859375,
-        "flops": 400431912
+        "flops": 400431912,
+        "params": 75064
     },
     "{'graph': 'spatial', 'input_width': '8', 'num_input_modules': '2', 'initial_block_type': 'basic', 'initial_residual': 'block', 'input_temporal_scales': '1', 'initial_main_width': '8', 'num_main_levels': '1', 'num_main_level_modules': '1', 'block_type': 'basic', 'bottleneck_factor': '4', 'residual': 'module', 'main_temporal_scales': '3', 'temporal_kernel_size': '9', 'se': 'inner', 'se_ratio': '4', 'se_type': 'relative', 'nonlinearity': 'swish', 'attention': 'channel', 'pool': 'spatial'}": {
         "best_auc": 0.96078,
@@ -60,7 +66,8 @@
         "grad_norm": 479.507568359375,
         "fisher": 448.7947998046875,
         "grasp": -10859.6875,
-        "flops": 778286600
+        "flops": 778286600,
+        "params": 205827
     },
     "{'graph': 'dis2', 'input_width': '10', 'num_input_modules': '2', 'initial_block_type': 'mbconv', 'initial_residual': 'null', 'input_temporal_scales': '2', 'initial_main_width': '6', 'num_main_levels': '1', 'num_main_level_modules': '1', 'block_type': 'mbconv', 'bottleneck_factor': '4', 'residual': 'block', 'main_temporal_scales': '3', 'temporal_kernel_size': '7', 'se': 'inner', 'se_ratio': '2', 'se_type': 'absolute', 'nonlinearity': 'relu', 'attention': 'channel', 'pool': 'spatial'}": {
         "best_auc": 0.96514,
@@ -69,7 +76,8 @@
         "grad_norm": 863.8291015625,
         "fisher": 187.0600128173828,
         "grasp": -36810.0234375,
-        "flops": 186061460
+        "flops": 186061460,
+        "params": 64585
     },
     "{'graph': 'dis4', 'input_width': '12', 'num_input_modules': '2', 'initial_block_type': 'bottleneck', 'initial_residual': 'block', 'input_temporal_scales': '3', 'initial_main_width': '12', 'num_main_levels': '2', 'num_main_level_modules': '1', 'block_type': 'mbconv', 'bottleneck_factor': '4', 'residual': 'dense', 'main_temporal_scales': '1', 'temporal_kernel_size': '5', 'se': 'inner', 'se_ratio': '4', 'se_type': 'absolute', 'nonlinearity': 'relu', 'attention': 'null', 'pool': 'spatial'}": {
         "best_auc": 0.93028,
@@ -78,7 +86,8 @@
         "grad_norm": 886.7848510742188,
         "fisher": 303.1318664550781,
         "grasp": -15906.8388671875,
-        "flops": 932597004
+        "flops": 932597004,
+        "params": 251518
     },
     "{'graph': 'spatial', 'input_width': '6', 'num_input_modules': '2', 'initial_block_type': 'mbconv', 'initial_residual': 'module', 'input_temporal_scales': '1', 'initial_main_width': '6', 'num_main_levels': '1', 'num_main_level_modules': '1', 'block_type': 'basic', 'bottleneck_factor': '2', 'residual': 'dense', 'main_temporal_scales': '1', 'temporal_kernel_size': '7', 'se': 'outer', 'se_ratio': '4', 'se_type': 'relative', 'nonlinearity': 'relu', 'attention': 'joint', 'pool': 'spatial'}": {
         "best_auc": 0.91721,
@@ -87,7 +96,8 @@
         "grad_norm": 463.7812194824219,
         "fisher": 115.31053924560547,
         "grasp": -12875.6748046875,
-        "flops": 63044826
+        "flops": 63044826,
+        "params": 40980
     },
     "{'graph': 'dis4', 'input_width': 8, 'num_input_modules': 3, 'initial_block_type': 'mbconv', 'initial_residual': 'dense', 'input_temporal_scales': 2, 'initial_main_width': 10, 'num_main_levels': 2, 'num_main_level_modules': 1, 'block_type': 'basic', 'bottleneck_factor': 4, 'residual': 'null', 'main_temporal_scales': 2, 'temporal_kernel_size': 3, 'se': 'outer', 'se_ratio': 2, 'se_type': 'relative', 'nonlinearity': 'swish', 'attention': 'channel', 'pool': 'global'}": {
         "synflow": 6.427480455959004e+17,
@@ -100,7 +110,8 @@
         "num_flops": 946660998,
         "best_loss": 0.5672889947891235,
         "best_auc": 0.9433551198257081,
-        "flops": 946660998
+        "flops": 946660998,
+        "params": 304502
     },
     "{'graph': 'spatial', 'input_width': 8, 'num_input_modules': 2, 'initial_block_type': 'bottleneck', 'initial_residual': 'null', 'input_temporal_scales': 2, 'initial_main_width': 8, 'num_main_levels': 1, 'num_main_level_modules': 1, 'block_type': 'bottleneck', 'bottleneck_factor': 2, 'residual': 'module', 'main_temporal_scales': 1, 'temporal_kernel_size': 3, 'se': 'null', 'se_ratio': 4, 'se_type': 'relative', 'nonlinearity': 'relu', 'attention': 'channel', 'pool': 'spatial'}": {
         "synflow": 8050109874898442.0,
@@ -113,7 +124,8 @@
         "num_flops": 116564304,
         "best_loss": 0.5545167922973633,
         "best_auc": 0.9150326797385621,
-        "flops": 116564304
+        "flops": 116564304,
+        "params": 42239
     },
     "{'graph': 'dis4', 'input_width': 8, 'num_input_modules': 2, 'initial_block_type': 'basic', 'initial_residual': 'null', 'input_temporal_scales': 'linear', 'initial_main_width': 8, 'num_main_levels': 2, 'num_main_level_modules': 1, 'block_type': 'mbconv', 'bottleneck_factor': 4, 'residual': 'block', 'main_temporal_scales': 1, 'temporal_kernel_size': 5, 'se': 'inner', 'se_ratio': 2, 'se_type': 'relative', 'nonlinearity': 'relu', 'attention': 'frame', 'pool': 'global'}": {
         "synflow": 1.5977318196222166e+77,
@@ -126,7 +138,8 @@
         "num_flops": 381278664,
         "best_loss": 0.7583585977554321,
         "best_auc": 0.9498910675381264,
-        "flops": 381278664
+        "flops": 381278664,
+        "params": 156814
     },
     "{'graph': 'dis4+2', 'input_width': 10, 'num_input_modules': 1, 'initial_block_type': 'basic', 'initial_residual': 'dense', 'input_temporal_scales': 2, 'initial_main_width': 10, 'num_main_levels': 1, 'num_main_level_modules': 3, 'block_type': 'bottleneck', 'bottleneck_factor': 2, 'residual': 'null', 'main_temporal_scales': 'linear', 'temporal_kernel_size': 3, 'se': 'outer', 'se_ratio': 4, 'se_type': 'absolute', 'nonlinearity': 'swish', 'attention': 'joint', 'pool': 'global'}": {
         "synflow": 2.870672038233072e+17,
@@ -139,7 +152,8 @@
         "num_flops": 130492278,
         "best_loss": 0.5737629532814026,
         "best_auc": 0.9019607843137254,
-        "flops": 130492278
+        "flops": 130492278,
+        "params": 48336
     },
     "{'graph': 'dis4+2', 'input_width': 10, 'num_input_modules': 1, 'initial_block_type': 'mbconv', 'initial_residual': 'null', 'input_temporal_scales': 1, 'initial_main_width': 8, 'num_main_levels': 1, 'num_main_level_modules': 3, 'block_type': 'bottleneck', 'bottleneck_factor': 2, 'residual': 'dense', 'main_temporal_scales': 1, 'temporal_kernel_size': 9, 'se': 'both', 'se_ratio': 2, 'se_type': 'relative', 'nonlinearity': 'swish', 'attention': 'frame', 'pool': 'spatial'}": {
         "synflow": 1.803196796356179e+83,
@@ -152,7 +166,8 @@
         "num_flops": 54178472,
         "best_loss": 0.6796025037765503,
         "best_auc": 0.710239651416122,
-        "flops": 54178472
+        "flops": 54178472,
+        "params": 37272
     },
     "{'graph': 'dis2', 'input_width': 10, 'num_input_modules': 3, 'initial_block_type': 'mbconv', 'initial_residual': 'block', 'input_temporal_scales': 'linear', 'initial_main_width': 8, 'num_main_levels': 2, 'num_main_level_modules': 1, 'block_type': 'bottleneck', 'bottleneck_factor': 4, 'residual': 'null', 'main_temporal_scales': 2, 'temporal_kernel_size': 5, 'se': 'outer', 'se_ratio': 2, 'se_type': 'absolute', 'nonlinearity': 'swish', 'attention': 'channel', 'pool': 'spatial'}": {
         "synflow": 1.8654451676985132e+28,
@@ -165,7 +180,8 @@
         "num_flops": 599345158,
         "best_loss": 0.5442670583724976,
         "best_auc": 0.9586056644880174,
-        "flops": 599345158
+        "flops": 599345158,
+        "params": 246736
     },
     "{'graph': 'dis2', 'input_width': 10, 'num_input_modules': 3, 'initial_block_type': 'mbconv', 'initial_residual': 'block', 'input_temporal_scales': 1, 'initial_main_width': 8, 'num_main_levels': 2, 'num_main_level_modules': 1, 'block_type': 'basic', 'bottleneck_factor': 2, 'residual': 'block', 'main_temporal_scales': 2, 'temporal_kernel_size': 5, 'se': 'null', 'se_ratio': 4, 'se_type': 'absolute', 'nonlinearity': 'relu', 'attention': 'channel', 'pool': 'global'}": {
         "synflow": 98388646758419.44,
@@ -178,7 +194,8 @@
         "num_flops": 231347588,
         "best_loss": 0.5002882480621338,
         "best_auc": 0.9498910675381264,
-        "flops": 231347588
+        "flops": 231347588,
+        "params": 84274
     },
     "{'graph': 'dis4+2', 'input_width': 6, 'num_input_modules': 2, 'initial_block_type': 'bottleneck', 'initial_residual': 'block', 'input_temporal_scales': 1, 'initial_main_width': 12, 'num_main_levels': 2, 'num_main_level_modules': 1, 'block_type': 'basic', 'bottleneck_factor': 2, 'residual': 'module', 'main_temporal_scales': 2, 'temporal_kernel_size': 3, 'se': 'null', 'se_ratio': 2, 'se_type': 'absolute', 'nonlinearity': 'swish', 'attention': 'joint', 'pool': 'global'}": {
         "synflow": 20987777118545.086,
@@ -191,7 +208,8 @@
         "num_flops": 141504710,
         "best_loss": 0.5050603747367859,
         "best_auc": 0.9629629629629629,
-        "flops": 141504710
+        "flops": 141504710,
+        "params": 87776
     },
     "{'graph': 'dis4', 'input_width': 6, 'num_input_modules': 2, 'initial_block_type': 'mbconv', 'initial_residual': 'dense', 'input_temporal_scales': 2, 'initial_main_width': 8, 'num_main_levels': 2, 'num_main_level_modules': 3, 'block_type': 'bottleneck', 'bottleneck_factor': 4, 'residual': 'block', 'main_temporal_scales': 2, 'temporal_kernel_size': 5, 'se': 'both', 'se_ratio': 2, 'se_type': 'absolute', 'nonlinearity': 'relu', 'attention': 'channel', 'pool': 'spatial'}": {
         "synflow": 1.742692776244318e+44,
@@ -204,7 +222,8 @@
         "num_flops": 353765174,
         "best_loss": 0.5361509323120117,
         "best_auc": 0.9455337690631809,
-        "flops": 353765174
+        "flops": 353765174,
+        "params": 337131
     },
     "{'graph': 'dis2', 'input_width': 6, 'num_input_modules': 3, 'initial_block_type': 'mbconv', 'initial_residual': 'module', 'input_temporal_scales': 1, 'initial_main_width': 6, 'num_main_levels': 1, 'num_main_level_modules': 3, 'block_type': 'basic', 'bottleneck_factor': 2, 'residual': 'dense', 'main_temporal_scales': 1, 'temporal_kernel_size': 7, 'se': 'both', 'se_ratio': 2, 'se_type': 'relative', 'nonlinearity': 'relu', 'attention': 'channel', 'pool': 'global'}": {
         "synflow": 5597519241219.058,
@@ -217,7 +236,8 @@
         "num_flops": 108605450,
         "best_loss": 0.573283314704895,
         "best_auc": 0.9411764705882353,
-        "flops": 108605450
+        "flops": 108605450,
+        "params": 49682
     },
     "{'graph': 'dis4', 'input_width': 10, 'num_input_modules': 1, 'initial_block_type': 'mbconv', 'initial_residual': 'module', 'input_temporal_scales': 2, 'initial_main_width': 10, 'num_main_levels': 2, 'num_main_level_modules': 1, 'block_type': 'basic', 'bottleneck_factor': 4, 'residual': 'dense', 'main_temporal_scales': 1, 'temporal_kernel_size': 3, 'se': 'inner', 'se_ratio': 4, 'se_type': 'relative', 'nonlinearity': 'relu', 'attention': 'joint', 'pool': 'global'}": {
         "synflow": 15545389470.709528,
@@ -230,7 +250,8 @@
         "num_flops": 306354056,
         "best_loss": 0.4826425015926361,
         "best_auc": 0.9607843137254902,
-        "flops": 306354056
+        "flops": 306354056,
+        "params": 141841
     },
     "{'graph': 'dis2', 'input_width': 8, 'num_input_modules': 3, 'initial_block_type': 'mbconv', 'initial_residual': 'module', 'input_temporal_scales': 1, 'initial_main_width': 10, 'num_main_levels': 1, 'num_main_level_modules': 2, 'block_type': 'bottleneck', 'bottleneck_factor': 4, 'residual': 'null', 'main_temporal_scales': 'linear', 'temporal_kernel_size': 5, 'se': 'inner', 'se_ratio': 2, 'se_type': 'relative', 'nonlinearity': 'relu', 'attention': 'frame', 'pool': 'global'}": {},
     "{'graph': 'dis4', 'input_width': 10, 'num_input_modules': 2, 'initial_block_type': 'mbconv', 'initial_residual': 'block', 'input_temporal_scales': 'linear', 'initial_main_width': 12, 'num_main_levels': 2, 'num_main_level_modules': 2, 'block_type': 'bottleneck', 'bottleneck_factor': 4, 'residual': 'dense', 'main_temporal_scales': 'linear', 'temporal_kernel_size': 3, 'se': 'inner', 'se_ratio': 2, 'se_type': 'relative', 'nonlinearity': 'relu', 'attention': 'channel', 'pool': 'spatial'}": {},

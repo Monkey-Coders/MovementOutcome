@@ -26,6 +26,7 @@ from zero_cost_proxies.synflow import calculate_synflow
 from zero_cost_proxies.snip import calculate_snip
 from zero_cost_proxies.fisher import calculate_fisher
 from zero_cost_proxies.flops import calculate_flops
+from zero_cost_proxies.params import calculate_params
 
 from utils import evaluate, feeder, graph
 
@@ -468,6 +469,8 @@ class Operator():
             score = calculate_fisher(self.model, self.data_loader, self.hyperparameters, self.output_device, self.loss)
         if method == "flops":
             score = calculate_flops(self.model, self.data_loader, self.hyperparameters, self.output_device, self.loss)
+        if method == "params":
+            score = calculate_params(self.model, self.data_loader, self.hyperparameters, self.output_device, self.loss)
         return score
         
     def close(self):

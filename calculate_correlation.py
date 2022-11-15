@@ -11,6 +11,7 @@ synflow = []
 fisher = []
 grasp = []
 flops = []
+params = []
 for model in results:
     try:
         model_stats = results[model]
@@ -21,6 +22,7 @@ for model in results:
         fisher.append(model_stats["fisher"])
         grasp.append(model_stats["grasp"])
         flops.append(model_stats["flops"])
+        params.append(model_stats["params"])
     except KeyError:
         pass
 
@@ -33,6 +35,8 @@ spearman_rank_synflow = stats.spearmanr(auc, synflow)
 spearman_rank_fisher = stats.spearmanr(auc, fisher)
 spearman_rank_grasp = stats.spearmanr(auc, grasp)
 spearman_rank_flops = stats.spearmanr(auc, flops)
+spearman_rank_params = stats.spearmanr(auc, params)
+
 print("="*80)
 print("Spearman rank for grad norm")
 print(spearman_rank_grad_norm)
@@ -51,6 +55,9 @@ print(spearman_rank_grasp)
 print("="*80)
 print("Spearman rank for flops")
 print(spearman_rank_flops)
+print("="*80)
+print("Spearman rank for params")
+print(spearman_rank_params)
 print("="*80)
 
 
@@ -78,6 +85,10 @@ result = {
     "flops": {
         "correlation": spearman_rank_flops.correlation,
         "pvalue": spearman_rank_flops
+    },
+    "params": {
+        "correlation": spearman_rank_params.correlation,
+        "pvalue": spearman_rank_params
     }
 }
 with open("zero_cost_experiments/spearman_rank.json", "w") as file:
