@@ -234,7 +234,7 @@ with open(PATH) as f:
 
 counter = 0
 
-measurements = ["synflow", "snip", "grad_norm", "fisher"]
+measurements = ["synflow", "snip", "grad_norm", "fisher", "grasp"]
 for candidate_key, values in candidate_dict.items():
     candidate_num = counter
     candidate = eval(candidate_key)
@@ -250,7 +250,7 @@ for candidate_key, values in candidate_dict.items():
     if candidate_needs_to_train:
         print("="*100)
         print(f"Training candidate: {counter}")
-        performance, validation_results = trainval(processed_data_dir, experiments_dir, candidate_num, candidate, hyperparameters, crossval_fold=None, train=True, use_zero_cost=False)
+        performance, validation_results = trainval(processed_data_dir, experiments_dir, candidate_num, candidate, hyperparameters, crossval_fold=None, train=True, zero_cost_method=None)
         results["val_accuracy"] = performance
         results["num_parameters"] = validation_results["num_parameters"]
         results["num_flops"] = validation_results["num_flops"]
