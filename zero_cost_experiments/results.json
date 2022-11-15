@@ -5,7 +5,8 @@
         "synflow": 5826326340.505462,
         "grad_norm": 906.943359375,
         "fisher": 1718.0228271484375,
-        "grasp": -53765.89453125
+        "grasp": -53765.89453125,
+        "flops": 1161292216
     },
     "{'graph': 'dis2', 'input_width': '12', 'num_input_modules': '3', 'initial_block_type': 'basic', 'initial_residual': 'module', 'input_temporal_scales': 'linear', 'initial_main_width': '6', 'num_main_levels': '2', 'num_main_level_modules': '3', 'block_type': 'basic', 'bottleneck_factor': '4', 'residual': 'dense', 'main_temporal_scales': '3', 'temporal_kernel_size': '9', 'se': 'null', 'se_ratio': '4', 'se_type': 'relative', 'nonlinearity': 'relu', 'attention': 'null', 'pool': 'spatial'}": {
         "best_auc": 0.94771,
@@ -13,7 +14,8 @@
         "synflow": 3.389221646727729e+33,
         "grad_norm": 5439.349609375,
         "fisher": 25350.2734375,
-        "grasp": -700697.0
+        "grasp": -700697.0,
+        "flops": 4596044026
     },
     "{'graph': 'dis4+2', 'input_width': '12', 'num_input_modules': '3', 'initial_block_type': 'mbconv', 'initial_residual': 'module', 'input_temporal_scales': '1', 'initial_main_width': '10', 'num_main_levels': '1', 'num_main_level_modules': '1', 'block_type': 'basic', 'bottleneck_factor': '2', 'residual': 'block', 'main_temporal_scales': '3', 'temporal_kernel_size': '9', 'se': 'null', 'se_ratio': '2', 'se_type': 'relative', 'nonlinearity': 'relu', 'attention': 'channel', 'pool': 'spatial'}": {
         "best_auc": 0.95207,
@@ -21,7 +23,8 @@
         "synflow": 92690532107345.84,
         "grad_norm": 820.4971313476562,
         "fisher": 274.2256164550781,
-        "grasp": -38902.16015625
+        "grasp": -38902.16015625,
+        "flops": 478840750
     },
     "{'graph': 'dis2', 'input_width': '6', 'num_input_modules': '1', 'initial_block_type': 'basic', 'initial_residual': 'dense', 'input_temporal_scales': '3', 'initial_main_width': '10', 'num_main_levels': '2', 'num_main_level_modules': '2', 'block_type': 'basic', 'bottleneck_factor': '2', 'residual': 'dense', 'main_temporal_scales': 'linear', 'temporal_kernel_size': '9', 'se': 'outer', 'se_ratio': '4', 'se_type': 'absolute', 'nonlinearity': 'relu', 'attention': 'channel', 'pool': 'spatial'}": {
         "best_auc": 0.96296,
@@ -29,7 +32,8 @@
         "synflow": 1.667680936470469e+18,
         "grad_norm": 1757.3746337890625,
         "fisher": 6101.2001953125,
-        "grasp": -144111.1875
+        "grasp": -144111.1875,
+        "flops": 336703664
     },
     "{'graph': 'dis4', 'input_width': '6', 'num_input_modules': '1', 'initial_block_type': 'bottleneck', 'initial_residual': 'module', 'input_temporal_scales': '2', 'initial_main_width': '10', 'num_main_levels': '2', 'num_main_level_modules': '1', 'block_type': 'basic', 'bottleneck_factor': '2', 'residual': 'module', 'main_temporal_scales': 'linear', 'temporal_kernel_size': '7', 'se': 'null', 'se_ratio': '2', 'se_type': 'absolute', 'nonlinearity': 'relu', 'attention': 'channel', 'pool': 'global'}": {
         "best_auc": 0.94118,
@@ -37,7 +41,8 @@
         "synflow": 1957629243055.7974,
         "grad_norm": 43.38821792602539,
         "fisher": 2.8901219367980957,
-        "grasp": -13.017105102539062
+        "grasp": -13.017105102539062,
+        "flops": 145577774
     },
     "{'graph': 'spatial', 'input_width': '12', 'num_input_modules': '2', 'initial_block_type': 'mbconv', 'initial_residual': 'dense', 'input_temporal_scales': '3', 'initial_main_width': '10', 'num_main_levels': '1', 'num_main_level_modules': '2', 'block_type': 'mbconv', 'bottleneck_factor': '4', 'residual': 'block', 'main_temporal_scales': '2', 'temporal_kernel_size': '9', 'se': 'null', 'se_ratio': '2', 'se_type': 'relative', 'nonlinearity': 'swish', 'attention': 'null', 'pool': 'spatial'}": {
         "best_auc": 0.96078,
@@ -45,7 +50,8 @@
         "synflow": 111367074417560.38,
         "grad_norm": 261.18878173828125,
         "fisher": 11.744089126586914,
-        "grasp": -1079.421630859375
+        "grasp": -1079.421630859375,
+        "flops": 400431912
     },
     "{'graph': 'spatial', 'input_width': '8', 'num_input_modules': '2', 'initial_block_type': 'basic', 'initial_residual': 'block', 'input_temporal_scales': '1', 'initial_main_width': '8', 'num_main_levels': '1', 'num_main_level_modules': '1', 'block_type': 'basic', 'bottleneck_factor': '4', 'residual': 'module', 'main_temporal_scales': '3', 'temporal_kernel_size': '9', 'se': 'inner', 'se_ratio': '4', 'se_type': 'relative', 'nonlinearity': 'swish', 'attention': 'channel', 'pool': 'spatial'}": {
         "best_auc": 0.96078,
@@ -53,7 +59,8 @@
         "synflow": 489204136052.8926,
         "grad_norm": 479.507568359375,
         "fisher": 448.7947998046875,
-        "grasp": -10859.6875
+        "grasp": -10859.6875,
+        "flops": 778286600
     },
     "{'graph': 'dis2', 'input_width': '10', 'num_input_modules': '2', 'initial_block_type': 'mbconv', 'initial_residual': 'null', 'input_temporal_scales': '2', 'initial_main_width': '6', 'num_main_levels': '1', 'num_main_level_modules': '1', 'block_type': 'mbconv', 'bottleneck_factor': '4', 'residual': 'block', 'main_temporal_scales': '3', 'temporal_kernel_size': '7', 'se': 'inner', 'se_ratio': '2', 'se_type': 'absolute', 'nonlinearity': 'relu', 'attention': 'channel', 'pool': 'spatial'}": {
         "best_auc": 0.96514,
@@ -61,7 +68,8 @@
         "synflow": 1045312791534.7395,
         "grad_norm": 863.8291015625,
         "fisher": 187.0600128173828,
-        "grasp": -36810.0234375
+        "grasp": -36810.0234375,
+        "flops": 186061460
     },
     "{'graph': 'dis4', 'input_width': '12', 'num_input_modules': '2', 'initial_block_type': 'bottleneck', 'initial_residual': 'block', 'input_temporal_scales': '3', 'initial_main_width': '12', 'num_main_levels': '2', 'num_main_level_modules': '1', 'block_type': 'mbconv', 'bottleneck_factor': '4', 'residual': 'dense', 'main_temporal_scales': '1', 'temporal_kernel_size': '5', 'se': 'inner', 'se_ratio': '4', 'se_type': 'absolute', 'nonlinearity': 'relu', 'attention': 'null', 'pool': 'spatial'}": {
         "best_auc": 0.93028,
@@ -69,7 +77,8 @@
         "synflow": 2.827948344336725e+18,
         "grad_norm": 886.7848510742188,
         "fisher": 303.1318664550781,
-        "grasp": -15906.8388671875
+        "grasp": -15906.8388671875,
+        "flops": 932597004
     },
     "{'graph': 'spatial', 'input_width': '6', 'num_input_modules': '2', 'initial_block_type': 'mbconv', 'initial_residual': 'module', 'input_temporal_scales': '1', 'initial_main_width': '6', 'num_main_levels': '1', 'num_main_level_modules': '1', 'block_type': 'basic', 'bottleneck_factor': '2', 'residual': 'dense', 'main_temporal_scales': '1', 'temporal_kernel_size': '7', 'se': 'outer', 'se_ratio': '4', 'se_type': 'relative', 'nonlinearity': 'relu', 'attention': 'joint', 'pool': 'spatial'}": {
         "best_auc": 0.91721,
@@ -77,7 +86,8 @@
         "synflow": 838790062.0718867,
         "grad_norm": 463.7812194824219,
         "fisher": 115.31053924560547,
-        "grasp": -12875.6748046875
+        "grasp": -12875.6748046875,
+        "flops": 63044826
     },
     "{'graph': 'dis4', 'input_width': 8, 'num_input_modules': 3, 'initial_block_type': 'mbconv', 'initial_residual': 'dense', 'input_temporal_scales': 2, 'initial_main_width': 10, 'num_main_levels': 2, 'num_main_level_modules': 1, 'block_type': 'basic', 'bottleneck_factor': 4, 'residual': 'null', 'main_temporal_scales': 2, 'temporal_kernel_size': 3, 'se': 'outer', 'se_ratio': 2, 'se_type': 'relative', 'nonlinearity': 'swish', 'attention': 'channel', 'pool': 'global'}": {
         "synflow": 6.427480455959004e+17,
@@ -89,7 +99,8 @@
         "num_parameters": 304502,
         "num_flops": 946660998,
         "best_loss": 0.5672889947891235,
-        "best_auc": 0.9433551198257081
+        "best_auc": 0.9433551198257081,
+        "flops": 946660998
     },
     "{'graph': 'spatial', 'input_width': 8, 'num_input_modules': 2, 'initial_block_type': 'bottleneck', 'initial_residual': 'null', 'input_temporal_scales': 2, 'initial_main_width': 8, 'num_main_levels': 1, 'num_main_level_modules': 1, 'block_type': 'bottleneck', 'bottleneck_factor': 2, 'residual': 'module', 'main_temporal_scales': 1, 'temporal_kernel_size': 3, 'se': 'null', 'se_ratio': 4, 'se_type': 'relative', 'nonlinearity': 'relu', 'attention': 'channel', 'pool': 'spatial'}": {
         "synflow": 8050109874898442.0,
@@ -101,7 +112,8 @@
         "num_parameters": 42239,
         "num_flops": 116564304,
         "best_loss": 0.5545167922973633,
-        "best_auc": 0.9150326797385621
+        "best_auc": 0.9150326797385621,
+        "flops": 116564304
     },
     "{'graph': 'dis4', 'input_width': 8, 'num_input_modules': 2, 'initial_block_type': 'basic', 'initial_residual': 'null', 'input_temporal_scales': 'linear', 'initial_main_width': 8, 'num_main_levels': 2, 'num_main_level_modules': 1, 'block_type': 'mbconv', 'bottleneck_factor': 4, 'residual': 'block', 'main_temporal_scales': 1, 'temporal_kernel_size': 5, 'se': 'inner', 'se_ratio': 2, 'se_type': 'relative', 'nonlinearity': 'relu', 'attention': 'frame', 'pool': 'global'}": {
         "synflow": 1.5977318196222166e+77,
@@ -113,7 +125,8 @@
         "num_parameters": 156814,
         "num_flops": 381278664,
         "best_loss": 0.7583585977554321,
-        "best_auc": 0.9498910675381264
+        "best_auc": 0.9498910675381264,
+        "flops": 381278664
     },
     "{'graph': 'dis4+2', 'input_width': 10, 'num_input_modules': 1, 'initial_block_type': 'basic', 'initial_residual': 'dense', 'input_temporal_scales': 2, 'initial_main_width': 10, 'num_main_levels': 1, 'num_main_level_modules': 3, 'block_type': 'bottleneck', 'bottleneck_factor': 2, 'residual': 'null', 'main_temporal_scales': 'linear', 'temporal_kernel_size': 3, 'se': 'outer', 'se_ratio': 4, 'se_type': 'absolute', 'nonlinearity': 'swish', 'attention': 'joint', 'pool': 'global'}": {
         "synflow": 2.870672038233072e+17,
@@ -125,7 +138,8 @@
         "num_parameters": 48336,
         "num_flops": 130492278,
         "best_loss": 0.5737629532814026,
-        "best_auc": 0.9019607843137254
+        "best_auc": 0.9019607843137254,
+        "flops": 130492278
     },
     "{'graph': 'dis4+2', 'input_width': 10, 'num_input_modules': 1, 'initial_block_type': 'mbconv', 'initial_residual': 'null', 'input_temporal_scales': 1, 'initial_main_width': 8, 'num_main_levels': 1, 'num_main_level_modules': 3, 'block_type': 'bottleneck', 'bottleneck_factor': 2, 'residual': 'dense', 'main_temporal_scales': 1, 'temporal_kernel_size': 9, 'se': 'both', 'se_ratio': 2, 'se_type': 'relative', 'nonlinearity': 'swish', 'attention': 'frame', 'pool': 'spatial'}": {
         "synflow": 1.803196796356179e+83,
@@ -137,7 +151,8 @@
         "num_parameters": 37272,
         "num_flops": 54178472,
         "best_loss": 0.6796025037765503,
-        "best_auc": 0.710239651416122
+        "best_auc": 0.710239651416122,
+        "flops": 54178472
     },
     "{'graph': 'dis2', 'input_width': 10, 'num_input_modules': 3, 'initial_block_type': 'mbconv', 'initial_residual': 'block', 'input_temporal_scales': 'linear', 'initial_main_width': 8, 'num_main_levels': 2, 'num_main_level_modules': 1, 'block_type': 'bottleneck', 'bottleneck_factor': 4, 'residual': 'null', 'main_temporal_scales': 2, 'temporal_kernel_size': 5, 'se': 'outer', 'se_ratio': 2, 'se_type': 'absolute', 'nonlinearity': 'swish', 'attention': 'channel', 'pool': 'spatial'}": {
         "synflow": 1.8654451676985132e+28,
@@ -149,7 +164,8 @@
         "num_parameters": 246736,
         "num_flops": 599345158,
         "best_loss": 0.5442670583724976,
-        "best_auc": 0.9586056644880174
+        "best_auc": 0.9586056644880174,
+        "flops": 599345158
     },
     "{'graph': 'dis2', 'input_width': 10, 'num_input_modules': 3, 'initial_block_type': 'mbconv', 'initial_residual': 'block', 'input_temporal_scales': 1, 'initial_main_width': 8, 'num_main_levels': 2, 'num_main_level_modules': 1, 'block_type': 'basic', 'bottleneck_factor': 2, 'residual': 'block', 'main_temporal_scales': 2, 'temporal_kernel_size': 5, 'se': 'null', 'se_ratio': 4, 'se_type': 'absolute', 'nonlinearity': 'relu', 'attention': 'channel', 'pool': 'global'}": {
         "synflow": 98388646758419.44,
@@ -161,7 +177,8 @@
         "num_parameters": 84274,
         "num_flops": 231347588,
         "best_loss": 0.5002882480621338,
-        "best_auc": 0.9498910675381264
+        "best_auc": 0.9498910675381264,
+        "flops": 231347588
     },
     "{'graph': 'dis4+2', 'input_width': 6, 'num_input_modules': 2, 'initial_block_type': 'bottleneck', 'initial_residual': 'block', 'input_temporal_scales': 1, 'initial_main_width': 12, 'num_main_levels': 2, 'num_main_level_modules': 1, 'block_type': 'basic', 'bottleneck_factor': 2, 'residual': 'module', 'main_temporal_scales': 2, 'temporal_kernel_size': 3, 'se': 'null', 'se_ratio': 2, 'se_type': 'absolute', 'nonlinearity': 'swish', 'attention': 'joint', 'pool': 'global'}": {
         "synflow": 20987777118545.086,
@@ -173,7 +190,8 @@
         "num_parameters": 87776,
         "num_flops": 141504710,
         "best_loss": 0.5050603747367859,
-        "best_auc": 0.9629629629629629
+        "best_auc": 0.9629629629629629,
+        "flops": 141504710
     },
     "{'graph': 'dis4', 'input_width': 6, 'num_input_modules': 2, 'initial_block_type': 'mbconv', 'initial_residual': 'dense', 'input_temporal_scales': 2, 'initial_main_width': 8, 'num_main_levels': 2, 'num_main_level_modules': 3, 'block_type': 'bottleneck', 'bottleneck_factor': 4, 'residual': 'block', 'main_temporal_scales': 2, 'temporal_kernel_size': 5, 'se': 'both', 'se_ratio': 2, 'se_type': 'absolute', 'nonlinearity': 'relu', 'attention': 'channel', 'pool': 'spatial'}": {
         "synflow": 1.742692776244318e+44,
@@ -185,7 +203,8 @@
         "num_parameters": 337131,
         "num_flops": 353765174,
         "best_loss": 0.5361509323120117,
-        "best_auc": 0.9455337690631809
+        "best_auc": 0.9455337690631809,
+        "flops": 353765174
     },
     "{'graph': 'dis2', 'input_width': 6, 'num_input_modules': 3, 'initial_block_type': 'mbconv', 'initial_residual': 'module', 'input_temporal_scales': 1, 'initial_main_width': 6, 'num_main_levels': 1, 'num_main_level_modules': 3, 'block_type': 'basic', 'bottleneck_factor': 2, 'residual': 'dense', 'main_temporal_scales': 1, 'temporal_kernel_size': 7, 'se': 'both', 'se_ratio': 2, 'se_type': 'relative', 'nonlinearity': 'relu', 'attention': 'channel', 'pool': 'global'}": {
         "synflow": 5597519241219.058,
@@ -197,7 +216,8 @@
         "num_parameters": 49682,
         "num_flops": 108605450,
         "best_loss": 0.573283314704895,
-        "best_auc": 0.9411764705882353
+        "best_auc": 0.9411764705882353,
+        "flops": 108605450
     },
     "{'graph': 'dis4', 'input_width': 10, 'num_input_modules': 1, 'initial_block_type': 'mbconv', 'initial_residual': 'module', 'input_temporal_scales': 2, 'initial_main_width': 10, 'num_main_levels': 2, 'num_main_level_modules': 1, 'block_type': 'basic', 'bottleneck_factor': 4, 'residual': 'dense', 'main_temporal_scales': 1, 'temporal_kernel_size': 3, 'se': 'inner', 'se_ratio': 4, 'se_type': 'relative', 'nonlinearity': 'relu', 'attention': 'joint', 'pool': 'global'}": {
         "synflow": 15545389470.709528,
@@ -209,7 +229,8 @@
         "num_parameters": 141841,
         "num_flops": 306354056,
         "best_loss": 0.4826425015926361,
-        "best_auc": 0.9607843137254902
+        "best_auc": 0.9607843137254902,
+        "flops": 306354056
     },
     "{'graph': 'dis2', 'input_width': 8, 'num_input_modules': 3, 'initial_block_type': 'mbconv', 'initial_residual': 'module', 'input_temporal_scales': 1, 'initial_main_width': 10, 'num_main_levels': 1, 'num_main_level_modules': 2, 'block_type': 'bottleneck', 'bottleneck_factor': 4, 'residual': 'null', 'main_temporal_scales': 'linear', 'temporal_kernel_size': 5, 'se': 'inner', 'se_ratio': 2, 'se_type': 'relative', 'nonlinearity': 'relu', 'attention': 'frame', 'pool': 'global'}": {},
     "{'graph': 'dis4', 'input_width': 10, 'num_input_modules': 2, 'initial_block_type': 'mbconv', 'initial_residual': 'block', 'input_temporal_scales': 'linear', 'initial_main_width': 12, 'num_main_levels': 2, 'num_main_level_modules': 2, 'block_type': 'bottleneck', 'bottleneck_factor': 4, 'residual': 'dense', 'main_temporal_scales': 'linear', 'temporal_kernel_size': 3, 'se': 'inner', 'se_ratio': 2, 'se_type': 'relative', 'nonlinearity': 'relu', 'attention': 'channel', 'pool': 'spatial'}": {},

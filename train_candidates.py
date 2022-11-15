@@ -234,7 +234,7 @@ with open(PATH) as f:
 
 counter = 0
 
-measurements = ["synflow", "snip", "grad_norm", "fisher", "grasp"]
+measurements = ["synflow", "snip", "grad_norm", "fisher", "grasp", "flops"]
 for candidate_key, values in candidate_dict.items():
     candidate_num = counter
     candidate = eval(candidate_key)
