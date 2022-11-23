@@ -243,19 +243,25 @@ for candidate_key, values in candidate_dict.items():
     
     for measurement in measurements:
         if measurement not in results:
+            time_start = time.time()
             score, _ = trainval(processed_data_dir, experiments_dir, candidate_num, candidate, hyperparameters, crossval_fold=None, train=False, zero_cost_method = measurement)
+            time_end = time.time()
+            time_elapsed = time_end - time_start
+            results[f"{measurement}_time_in_seconds"] = time_elapsed
             results[measurement] = score
-
     candidate_needs_to_train = "best_auc" not in results
     if candidate_needs_to_train:
         print("="*100)
         print(f"Training candidate: {counter}")
+        time_start = time.time()
         performance, validation_results = trainval(processed_data_dir, experiments_dir, candidate_num, candidate, hyperparameters, crossval_fold=None, train=True, zero_cost_method=None)
+        time_end = time.time()
         results["val_accuracy"] = performance
         results["num_parameters"] = validation_results["num_parameters"]
         results["num_flops"] = validation_results["num_flops"]
         results["best_loss"] = validation_results["best_loss"]
         results["best_auc"] = validation_results["best_auc"]
+        results["training_validation_time_in_seconds"] = time_end - time_start
         print(f"Performance: {performance}")
         print("="*100)
         print(f"Finished training candidate: {counter}")

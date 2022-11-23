@@ -29,13 +29,13 @@ for model in results:
 #print(auc)
 #print(grad_norm)
 
-spearman_rank_grad_norm = stats.spearmanr(auc, grad_norm)
-spearman_rank_snip = stats.spearmanr(auc, snip)
-spearman_rank_synflow = stats.spearmanr(auc, synflow)
-spearman_rank_fisher = stats.spearmanr(auc, fisher)
-spearman_rank_grasp = stats.spearmanr(auc, grasp)
-spearman_rank_flops = stats.spearmanr(auc, flops)
-spearman_rank_params = stats.spearmanr(auc, params)
+spearman_rank_grad_norm = abs(stats.spearmanr(auc, grad_norm, nan_policy="omit"))
+spearman_rank_snip = abs(stats.spearmanr(auc, snip, nan_policy="omit"))
+spearman_rank_synflow = abs(stats.spearmanr(auc, synflow, nan_policy="omit"))
+spearman_rank_fisher = abs(stats.spearmanr(auc, fisher, nan_policy="omit"))
+spearman_rank_grasp = abs(stats.spearmanr(auc, grasp, nan_policy="omit"))
+spearman_rank_flops = abs(stats.spearmanr(auc, flops, nan_policy="omit"))
+spearman_rank_params = abs(stats.spearmanr(auc, params, nan_policy="omit"))
 
 print("="*80)
 print("Spearman rank for grad norm")
@@ -63,32 +63,32 @@ print("="*80)
 
 result = {
     "grad_norm": {
-        "correlation": spearman_rank_grad_norm.correlation,
-        "pvalue": spearman_rank_grad_norm.pvalue
+        "correlation": round(spearman_rank_grad_norm.correlation,3),
+        "pvalue": round(spearman_rank_grad_norm.pvalue,3)
     },
     "snip": {
-        "correlation": spearman_rank_snip.correlation,
-        "pvalue": spearman_rank_snip.pvalue
+        "correlation": round(spearman_rank_snip.correlation,3),
+        "pvalue": round(spearman_rank_snip.pvalue,3)
     },
     "synflow": {
-        "correlation": spearman_rank_synflow.correlation,
-        "pvalue": spearman_rank_synflow.pvalue
+        "correlation": round(spearman_rank_synflow.correlation,3),
+        "pvalue": round(spearman_rank_synflow.pvalue,3)
     },
     "fisher": {
-        "correlation": spearman_rank_fisher.correlation,
-        "pvalue": spearman_rank_fisher
+        "correlation": round(spearman_rank_fisher.correlation,3),
+        "pvalue": round(spearman_rank_fisher,3)
     },
     "grasp": {
-        "correlation": spearman_rank_grasp.correlation,
-        "pvalue": spearman_rank_grasp
+        "correlation": round(spearman_rank_grasp.correlation,3),
+        "pvalue": round(spearman_rank_grasp,3)
     },
     "flops": {
-        "correlation": spearman_rank_flops.correlation,
-        "pvalue": spearman_rank_flops
+        "correlation": round(spearman_rank_flops.correlation,3),
+        "pvalue": round(spearman_rank_flops,3)
     },
     "params": {
-        "correlation": spearman_rank_params.correlation,
-        "pvalue": spearman_rank_params
+        "correlation": round(spearman_rank_params.correlation,3),
+        "pvalue": round(spearman_rank_params,3)
     }
 }
 with open("zero_cost_experiments/spearman_rank.json", "w") as file:
