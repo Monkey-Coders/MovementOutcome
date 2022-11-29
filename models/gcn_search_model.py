@@ -4,6 +4,10 @@ import torch.nn.functional as F
 from torch.autograd import Variable
 import math
 import copy
+import types
+
+def no_op(self, x):
+    return x
 
 # https://github.com/narumiruna/efficientnet-pytorch/blob/master/efficientnet/models/efficientnet.py
 class Swish(nn.Module):
@@ -819,18 +823,10 @@ class Model(nn.Module):
         
         self.fcn = nn.Conv2d(level_input_width, num_classes, kernel_size=1)
         nn.init.kaiming_normal_(self.fcn.weight, mode='fan_out', nonlinearity='linear')
-    '''
-    (self, num_classes, graphs, input_channels=6, 
-    edge_importance_weighting=True, dropout=0.0, num_input_branches=3, 
-    attention='null', spatial_pool=False, se_outer=False, se_inner=False,
-    initial_residual='null', residual='dense', initial_block_type='basic',
-    block_type='basic', input_width=16, initial_main_width=32, temporal_kernel_size=9,
-    num_input_modules=3, num_main_levels=2, num_main_level_modules=2, 
-    input_temporal_scales=[1,1,1], main_temporal_scales=[1,1], 
-    bottleneck_factor=4, se_ratio=4, relative_se=False, 
-    swish_nonlinearity=False, **kwargs):
-    '''
-    def get_copy(self):
+    
+
+
+    def get_copy(self, bn=False):
 
         # model_new = Network(self.spec, self.stem_out, self.num_stacks, self.num_mods, self.num_classes, bn=bn)
         model_new = Model(num_classes=self.num_classes, graphs=self.graphs, input_channels=self.input_channels,
@@ -846,6 +842,10 @@ class Model(nn.Module):
             bottleneck_factor=self.bottleneck_factor, se_ratio=self.se_ratio,
             relative_se=self.relative_se, swish_nonlinearity=self.swish_nonlinearity)
         
+        if bn == False:
+            for l in model_new.modules():
+                if isinstance(l, nn.BatchNorm2d) or isinstance(l, nn.BatchNorm1d):
+                    l.forward = types.MethodType(no_op, l)
         model_new.load_state_dict(self.state_dict(), strict=False)
         return model_new
 

@@ -3,8 +3,9 @@ from utils_functions import initialise_zero_cost_proxy, get_score
 import torch.autograd as autograd
 
 def calculate_grasp(net, data_loader, hyperparameters, output_device, loss_function ):
+    bn = True
     device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
-    model, data, labels, loader = initialise_zero_cost_proxy(net, data_loader, hyperparameters, output_device, train=True, eval=False)
+    model, data, labels, loader = initialise_zero_cost_proxy(net, data_loader, hyperparameters, output_device, train=True, eval=False, bn=bn)
     
     # get all applicable weights
     weights = []

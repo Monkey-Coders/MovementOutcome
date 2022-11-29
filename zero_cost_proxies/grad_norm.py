@@ -5,8 +5,9 @@ from torch.autograd import Variable
 
 
 def calculate_grad_norm(net, data_loader, hyperparameters, output_device, loss_function ):
+    bn = True
     device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
-    model, data, labels, loader = initialise_zero_cost_proxy(net, data_loader, hyperparameters, output_device, train=True, eval=False)
+    model, data, labels, loader = initialise_zero_cost_proxy(net, data_loader, hyperparameters, output_device, train=True, eval=False, bn=bn)
 
     output, _ = model(data)
     loss = loss_function(output, labels)

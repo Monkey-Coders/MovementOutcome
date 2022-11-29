@@ -17,8 +17,9 @@ def fisher_forward_linear(self, x):
     return self.act
 
 def calculate_fisher(net, data_loader, hyperparameters, output_device, loss_function ):
+    bn = True
     device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
-    model, data, labels, loader = initialise_zero_cost_proxy(net, data_loader, hyperparameters, output_device, train=True, eval=False)
+    model, data, labels, loader = initialise_zero_cost_proxy(net, data_loader, hyperparameters, output_device, train=True, eval=False, bn=True)
     mode = "channel"
     if mode == "param":
         raise ValueError("Fisher is not implemented for param mode")

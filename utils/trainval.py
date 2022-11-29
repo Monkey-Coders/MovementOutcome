@@ -27,6 +27,7 @@ from zero_cost_proxies.snip import calculate_snip
 from zero_cost_proxies.fisher import calculate_fisher
 from zero_cost_proxies.flops import calculate_flops
 from zero_cost_proxies.params import calculate_params
+from zero_cost_proxies.jacov import calculate_jacobian
 
 from utils import evaluate, feeder, graph
 
@@ -348,11 +349,11 @@ class Operator():
 
                 # Fetch batch
                 if self.hyperparameters['devices']['gpu_available']:
-                    data = Variable(data.float().cuda(self.output_device), requires_grad=False, volatile=True)
-                    labels = Variable(labels.long().cuda(self.output_device), requires_grad=False, volatile=True)
+                    data = Variable(data.float().cuda(self.output_device), requires_grad=False)
+                    labels = Variable(labels.long().cuda(self.output_device), requires_grad=False)
                 else:
-                    data = Variable(data.float(), requires_grad=False, volatile=True)
-                    labels = Variable(labels.long(), requires_grad=False, volatile=True)
+                    data = Variable(data.float(), requires_grad=False)
+                    labels = Variable(labels.long(), requires_grad=False)
 
                 # Perform inference
                 output, feature = self.model(data)
@@ -471,6 +472,8 @@ class Operator():
             score = calculate_flops(self.model, self.data_loader, self.hyperparameters, self.output_device, self.loss)
         if method == "params":
             score = calculate_params(self.model, self.data_loader, self.hyperparameters, self.output_device, self.loss)
+        if method == "jacobian":
+            score = calculate_jacobian(self.model, self.data_loader, self.hyperparameters, self.output_device, self.loss)
         return score
         
     def close(self):

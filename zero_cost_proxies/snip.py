@@ -15,7 +15,8 @@ def snip_forward_linear(self, x):
         return F.linear(x, self.weight * self.weight_mask, self.bias)
 
 def calculate_snip(net, data_loader, hyperparameters, output_device, loss_function ):
-    model, data, labels, loader = initialise_zero_cost_proxy(net, data_loader, hyperparameters, output_device)
+    bn = True
+    model, data, labels, loader = initialise_zero_cost_proxy(net, data_loader, hyperparameters, output_device, bn=bn)
 
     for layer in model.modules():
         if isinstance(layer, nn.Conv2d) or isinstance(layer, nn.Linear):

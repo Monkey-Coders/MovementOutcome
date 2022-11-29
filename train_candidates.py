@@ -5,6 +5,7 @@ from datetime import datetime
 import json
 import io
 import time
+import gc
 
 from utils_functions import get_model_from_candidate_file, get_candidate
 RUN = datetime.now()
@@ -39,7 +40,9 @@ frames_per_second = 30.0 # <-- Assign (i.e., assumes consistent frame rate acros
 filter_stride = 2 # <-- Assign stride of median filter for temporal smoothing of coordinates.
 
 #### Step 9: Set hyperparameters for training and validation (e.g., mini batch size and loss filter size)
-trainval_batch_size = 32 
+#trainval_batch_size = 32 
+trainval_batch_size = 16 
+
 loss_filter_size = 5
 
 #### Step 10: Balance the training set by adjusting the number of positive samples per negative sample (e.g., for In-Motion with around 5 times more negative samples than positive samples (15% prevalence of CP), each positive sample is represented 5 times more frequent than each negative sample).
@@ -209,6 +212,8 @@ hyperparameters = {'devices': {'output_device': output_device,
                       }
 
 
+
+
 processed_data_dir = os.path.join(os.environ["HOME"], "..", "..", "data", "stud", "maxts", "data", "dim", "processed", "infants_resampled_smoothed")
 search_dir = os.path.join(project_dir, 'searches', search_name)
 experiments_dir = os.path.join(search_dir, 'experiments')
@@ -234,7 +239,7 @@ with open(PATH) as f:
 
 counter = 0
 
-measurements = ["synflow", "snip", "grad_norm", "fisher", "grasp", "flops", "params"]
+measurements = ["synflow", "snip", "grad_norm", "fisher", "grasp", "flops", "params", "jacobian"]
 for candidate_key, values in candidate_dict.items():
     candidate_num = counter
     candidate = eval(candidate_key)
@@ -243,6 +248,8 @@ for candidate_key, values in candidate_dict.items():
     
     for measurement in measurements:
         if measurement not in results:
+            torch.cuda.empty_cache()
+            gc.collect()
             time_start = time.time()
             score, _ = trainval(processed_data_dir, experiments_dir, candidate_num, candidate, hyperparameters, crossval_fold=None, train=False, zero_cost_method = measurement)
             time_end = time.time()
@@ -251,6 +258,8 @@ for candidate_key, values in candidate_dict.items():
             results[measurement] = score
     candidate_needs_to_train = "best_auc" not in results
     if candidate_needs_to_train:
+        torch.cuda.empty_cache()
+        gc.collect()
         print("="*100)
         print(f"Training candidate: {counter}")
         time_start = time.time()
@@ -269,7 +278,7 @@ for candidate_key, values in candidate_dict.items():
     
 
     candidate_dict[candidate_key] = results
-    print("Writing results to file")
+    print(f"Writing results to file for candidate: {counter}")
     with open(PATH, "w") as f:
         json.dump(candidate_dict, f)
     counter += 1

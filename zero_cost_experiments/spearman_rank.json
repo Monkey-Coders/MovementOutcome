@@ -1,1 +1,34 @@
-{"grad_norm": {"correlation": -0.04548563877495972, "pvalue": 0.8253732678338734}, "snip": {"correlation": -0.01333789407686789, "pvalue": 0.948438312626618}, "synflow": {"correlation": -0.4952120672642232, "pvalue": 0.010103913379647979}, "fisher": {"correlation": -0.03488372297026986, "pvalue": [-0.03488372297026986, 0.865658280844044]}, "grasp": {"correlation": -0.05882353285182761, "pvalue": [-0.05882353285182761, 0.7753086464919237]}, "flops": {"correlation": 0.13064296249650087, "pvalue": [0.13064296249650087, 0.5246953268004219]}, "params": {"correlation": 0.12619699780421156, "pvalue": [0.12619699780421156, 0.5390185956772919]}}
+{
+    "grad_norm": {
+        "correlation": -0.095,
+        "pvalue": 0.624
+    },
+    "snip": {
+        "correlation": -0.049,
+        "pvalue": 0.801
+    },
+    "synflow": {
+        "correlation": -0.415,
+        "pvalue": 0.025
+    },
+    "fisher": {
+        "correlation": -0.106,
+        "pvalue": 0.583
+    },
+    "grasp": {
+        "correlation": -0.0,
+        "pvalue": 0.998
+    },
+    "flops": {
+        "correlation": 0.171,
+        "pvalue": 0.376
+    },
+    "params": {
+        "correlation": 0.191,
+        "pvalue": 0.32
+    },
+    "jacobian": {
+        "correlation": -0.12,
+        "pvalue": 0.535
+    }
+}
